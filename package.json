@@ -4,8 +4,8 @@
   "main": "postcss.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "Vite",
-    "build": "Vite build"
+    "dev": "vite",
+    "build": "vite build"
   },
   "keywords": [],
   "author": "",
