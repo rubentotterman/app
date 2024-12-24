@@ -1,4 +1,5 @@
 import { Chart, registerables } from "chart.js";
+import { createClient } from '@supabase/supabase-js';
 Chart.register(...registerables);
 
 
