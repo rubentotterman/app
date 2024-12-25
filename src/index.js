@@ -6,6 +6,34 @@ Chart.register(...registerables);
 const supabaseUrl = 'https://ynaebzwplirfhvoxrvnz.supabase.co';
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InluYWViendwbGlyZmh2b3hydm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQzMDg4NTAsImV4cCI6MjA0OTg4NDg1MH0.Ac6HePbKTdeCVDWAe8KIZOO4iXzIuLODWKRzyhqmfpA';
 
+// Function to sign in with Discord
+async function signInWithDiscord() {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'discord',
+    options: {
+      redirecTo: ''
+    }
+  });
+
+  if (error) {
+    console.error('Error signing in with Discord:', error);
+  } else {
+    console.log('Successfully signed in with Discord:', data);
+  }
+}
+
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_IN') {
+    console.log('User signed in:', session);
+    // Here you can update UI or fetch user details
+  } else if (event === 'SIGNED_OUT') {
+    console.log('User signed out');
+  }
+});
+
+document.getElementById('loginWithDiscord').addEventListener('click', signInWithDiscord),
+
+
 
   document.addEventListener("DOMContentLoaded", async () => {
     console.log("DOMContentLoaded event fired.");
@@ -28,6 +56,8 @@ const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
     };
 
     
+
+
     // Popup handling
     elements.loginButton?.addEventListener("click", () => {
       elements.loginPopup?.classList.remove("hidden");
