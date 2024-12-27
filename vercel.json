@@ -1,5 +1,5 @@
 {
-    "builds": [
+    "rewrites": [
       {
         "src": "package.json",
         "use": "@vercel/node"
