@@ -7,6 +7,9 @@ export default defineConfig({
     outDir: 'dist',
   },
   server: {
-    port: 3000,
+    open: true,
+    env: {
+      BROWSER: 'chrome',
+    }
   },
 });

@@ -1,8 +1,8 @@
 import { Chart, registerables } from "chart.js";
-import { createClient } from '@supabase/supabase-js';
 Chart.register(...registerables);
+import { createClient } from '@supabase/supabase-js';
 
-// Replace these with your Supabase URL and anon key from your project settings
+
 const supabaseUrl = 'https://ynaebzwplirfhvoxrvnz.supabase.co';
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InluYWViendwbGlyZmh2b3hydm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQzMDg4NTAsImV4cCI6MjA0OTg4NDg1MH0.Ac6HePbKTdeCVDWAe8KIZOO4iXzIuLODWKRzyhqmfpA';
 

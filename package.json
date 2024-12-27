@@ -4,14 +4,14 @@
   "main": "postcss.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite",
+    "dev": "set BROWSER=chrome && vite",
     "prebuild": "chmod +x node_modules/.bin/vite",
     "build": "npx vite build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "description": "",
   "devDependencies": {
     "autoprefixer": "^10.4.20",
