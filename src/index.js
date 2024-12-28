@@ -5,12 +5,33 @@ import { createClient } from '@supabase/supabase-js';
 const supabase = createClient('https://ynaebzwplirfhvoxrvnz.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InluYWViendwbGlyZmh2b3hydm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQzMDg4NTAsImV4cCI6MjA0OTg4NDg1MH0.Ac6HePbKTdeCVDWAe8KIZOO4iXzIuLODWKRzyhqmfpA');
 
 
+
+document.addEventListener("DOMContentLoaded", async () => {
+  console.log("DOMContentLoaded event fired.");
+
+  // Element selections
+  const elements = {
+    scrollContainer: document.getElementById("scrollContainer"),
+    addCardBtn: document.getElementById("addCardBtn"),
+    hamburgerButton: document.getElementById("hamburgerButton"),
+    mobileMenu: document.getElementById("mobileMenu"),
+    exitButton: document.getElementById("exit"),
+    scrollLeftBtn: document.getElementById("scrollLeftBtn"),
+    scrollRightBtn: document.getElementById("scrollRightBtn"),
+    workoutDaysElement: document.getElementById("workout-days"),
+    workoutBarChartCanvas: document.getElementById("workoutBarChartCanvas"),
+    sleepChartCanvas: document.getElementById("sleepChartCanvas"),
+    loginButton: document.getElementById("loginButton"),
+    loginPopup: document.getElementById("loginPopup"),
+    closePopup: document.getElementById("closePopup"), 
+  };
+
 // Function to sign in with Discord
 async function signInWithDiscord() {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'discord',
     options: {
-      redirecTo: 'https://app-bo6g.vercel.app/'
+      redirectTo: 'https://app-bo6g.vercel.app/'
     }
   });
 
@@ -21,38 +42,70 @@ async function signInWithDiscord() {
   }
 }
 
+
 supabase.auth.onAuthStateChange((event, session) => {
   if (event === 'SIGNED_IN') {
     console.log('User signed in:', session);
-    // Here you can update UI or fetch user details
+
+    //Store user session data in local
+    if(session) {
+      localStorage.setItem('user', JSON.stringify(session.user));
+      localStorage.setItem('access_token', session.access_token);
+    }
+
+    //Show logoutbutton and hide loginbutton
+    loginButton.style.display = 'none';
+    logoutButton.style.display = 'block';
+
+    //Logout functionality
+    logoutButton.onlick = async () => {
+      await supabase.auth.signOut();
+    };
+
+    console.log('Stored user in localStorage: ', session.user);
   } else if (event === 'SIGNED_OUT') {
     console.log('User signed out');
-  }
+
+    // Show login button and hide logout button
+    loginButton.style.display = 'block';
+    logoutButton.style.display = 'none';
+
+    //Login functionality
+    loginButton.onlick = () => {
+      signInWithDiscord();
+    };
+   }
 });
 
-document.getElementById('loginWithDiscord').addEventListener('click', signInWithDiscord),
 
+const initializeAuthButtons = async () => {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
+  if (session?.user) {
+    // User is already signed in
+    loginButton.style.display = 'none';
+    logoutButton.style.display = 'block';
 
-  document.addEventListener("DOMContentLoaded", async () => {
-    console.log("DOMContentLoaded event fired.");
-
-    // Element selections
-    const elements = {
-      scrollContainer: document.getElementById("scrollContainer"),
-      addCardBtn: document.getElementById("addCardBtn"),
-      hamburgerButton: document.getElementById("hamburgerButton"),
-      mobileMenu: document.getElementById("mobileMenu"),
-      exitButton: document.getElementById("exit"),
-      scrollLeftBtn: document.getElementById("scrollLeftBtn"),
-      scrollRightBtn: document.getElementById("scrollRightBtn"),
-      workoutDaysElement: document.getElementById("workout-days"),
-      workoutBarChartCanvas: document.getElementById("workoutBarChartCanvas"),
-      sleepChartCanvas: document.getElementById("sleepChartCanvas"),
-      loginButton: document.getElementById("loginButton"),
-      loginPopup: document.getElementById("loginPopup"),
-      closePopup: document.getElementById("closePopup"), 
+    logoutButton.onclick = async () => {
+      await supabase.auth.signOut();
     };
+  } else {
+    // User is not signed in
+    loginButton.style.display = 'block';
+    logoutButton.style.display = 'none';
+
+    loginButton.onclick = () => {
+      signInWithDiscord();
+    };
+  }
+};
+
+
+
+  // call initialization function on page load
+  initializeAuthButtons();
 
     
 
