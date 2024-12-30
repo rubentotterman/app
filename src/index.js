@@ -135,12 +135,14 @@ const initializeAuthButtons = async () => {
 
     //Show mobile menu
     const showMenu = () => {
-      mobileMenu.classList.remove('hidden');
+      mobileMenu.classList.remove('translate-x-full');
+      mobileMenu.classList.add('translate-x-0');
     };
 
     //Hide mobile menu
     const hideMenu = () => {
-      mobileMenu.classList.add('hidden');
+      mobileMenu.classList.remove('translate-x-0');
+      mobileMenu.classList.add('translate-x-full');
     }
 
     //Open Menu

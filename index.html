@@ -9,7 +9,7 @@
 </head>
 <body class="bg-[#191824] flex flex-col min-h-screen">
     <!--Content wrapper (adjust values in config if needed)-->
-  <div id="app" class="container flex flex-1 flex-col">
+  <div id="app" class="container relative flex flex-1 flex-col">
 
     <!--Navbar content-->
     <nav class="navbar justify-between text text-white pt-5 relative flex">
@@ -34,8 +34,8 @@
 
 
         <!-- Mobile Menu (hidden by default, shown when the hamburger is clicked) -->
-        <div id="mobileMenu" class="lg:hidden hidden relative">
-          <div class="absolute right-0 bg-[#252430] py-2 w-[200px] font-semibold">
+        <div id="mobileMenu" class="lg:hidden  fixed top-0 right-0 h-full w-64 z-40 bg-[#252430] transform translate-x-full translate-x-0 transition-transform duration-300">
+          <div class="py-2 font-semibold text-white">
             <div class="flex justify-end px-2 cursor-pointer">
               <button id="exitButton"><i class="fa-solid fa-xmark"></i></button>
             </div>
