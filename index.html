@@ -34,26 +34,30 @@
 
 
         <!-- Mobile Menu (hidden by default, shown when the hamburger is clicked) -->
-        <div id="mobileMenu" class="lg:hidden  fixed top-0 right-0 h-full w-64 z-40 bg-[#252430] transform translate-x-full translate-x-0 transition-transform duration-300">
-          <div class="py-2 font-semibold text-white">
-            <div class="flex justify-end px-2 cursor-pointer">
-              <button id="exitButton"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="flex items-center gap-2 w-full hover:text-white  px-2">
-              <i class="fa-solid fa-house"></i>
-              <a href="#" class="block text-white py-2">Home</a>
-            </div>
-            <div class="flex items-center gap-2 w-full  px-2">
-              <i class="fa-solid fa-house"></i>
-              <a href="#" class="block text-white py-2">Workouts</a>
-            </div>
-            <div class="flex items-center gap-2 w-full  px-2">
-              <i class="fa-solid fa-house"></i>
-              <a href="#" class="block text-white py-2">Stats</a>
-            </div>
-            <div class="flex items-center gap-2 w-full  px-2">
-              <i class="fa-solid fa-house"></i>
-              <a href="#" class="block text-white py-2">Settings</a>
+        <div id="mobileMenu" class="lg:hidden ring-2 ring-white/10 fixed top-0 right-0 h-full w-64 z-40 bg-[#252430] transform translate-x-full translate-x-0 transition-transform duration-300">
+          <div class="flex justify-end px-6 py-2 cursor-pointer text-white">
+            <button id="exitButton"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <div class="flex font-semibold text-gray-800 min-h-full">
+            <div class="flex flex-col w-full justify-between">
+              <div>
+                <div class="flex items-center gap-2 w-full px-2 text-white">
+                  <i class="fa-solid fa-house"></i>
+                  <a href="#" class="block py-2">Home</a>
+                </div>
+                <div class="flex items-center gap-2 w-full  px-2 text-white">
+                  <i class="fa-solid fa-person-running"></i>
+                  <a href="#" class="block  py-2">Workouts</a>
+                </div>
+                <div class="flex items-center gap-2 w-full px-2 text-white">
+                  <i class="fa-solid fa-chart-simple"></i>
+                  <a href="#" class="block py-2">Stats</a>
+                </div>
+              </div>
+                <div class="flex items-center gap-2 w-full px-2 text-white mb-12">
+                  <i class="fa-solid fa-gear"></i>
+                  <a href="#" class="block  py-2">Settings</a>
+                </div>
             </div>
           </div>
         </div>
