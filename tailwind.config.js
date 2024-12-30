@@ -5,7 +5,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      ringColor: {
+        'white/10': 'hsla(0,0%,100%,0.1)',
+       },
+    },
   },
   plugins: [],
   safelist: [
