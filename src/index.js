@@ -137,12 +137,14 @@ const initializeAuthButtons = async () => {
     const showMenu = () => {
       mobileMenu.classList.remove('translate-x-full');
       mobileMenu.classList.add('translate-x-0');
+      document.addEventListener("click", closeMenuOnOutsideClick);
     };
 
     //Hide mobile menu
     const hideMenu = () => {
       mobileMenu.classList.remove('translate-x-0');
       mobileMenu.classList.add('translate-x-full');
+      document.removeEventListener("click", closeMenuOnOutsideClick);
     }
 
     //Open Menu
@@ -150,5 +152,12 @@ const initializeAuthButtons = async () => {
 
     //Close Menu
     exitButton.addEventListener('click', hideMenu);
+
+    //Close Menu if outside click
+    function closeMenuOnOutsideClick(event) {
+      if (!mobileMenu.contains(event.target) && !hamburgerButton.contains(event.target)) {
+        hideMenu();
+      }
+    }
 
   });
