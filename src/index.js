@@ -108,8 +108,6 @@ const initializeAuthButtons = async () => {
   initializeAuthButtons();
 
     
-
-
    
     // Charts
     if (elements.workoutBarChartCanvas) {
@@ -137,4 +135,15 @@ const initializeAuthButtons = async () => {
         options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } },
       });
     }
+
+
+    //Open hamburgermenu
+
+    function toggleMenu() {
+      mobileMenu.classList.toggle("hidden"); //Toggle hidden to show/hide
+    }
+
+    hamburgerButton.addEventListener("click", toggleMenu);
+    exitButton.addEventListener("click", toggleMenu);
+
   });
