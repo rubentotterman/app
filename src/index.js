@@ -135,7 +135,7 @@ const initializeAuthButtons = async () => {
 
     //Show mobile menu
     const showMenu = () => {
-      mobileMenu.classList.remove('translate-x-full');
+      mobileMenu.classList.remove('hidden', 'translate-x-full');
       mobileMenu.classList.add('translate-x-0');
       document.addEventListener("click", closeMenuOnOutsideClick);
     };
@@ -143,7 +143,7 @@ const initializeAuthButtons = async () => {
     //Hide mobile menu
     const hideMenu = () => {
       mobileMenu.classList.remove('translate-x-0');
-      mobileMenu.classList.add('translate-x-full');
+      mobileMenu.classList.add('hidden', 'translate-x-full');
       document.removeEventListener("click", closeMenuOnOutsideClick);
     }
 
