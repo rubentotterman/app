@@ -15,15 +15,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     addCardBtn: document.getElementById("addCardBtn"),
     hamburgerButton: document.getElementById("hamburgerButton"),
     mobileMenu: document.getElementById("mobileMenu"),
-    exitButton: document.getElementById("exit"),
-    scrollLeftBtn: document.getElementById("scrollLeftBtn"),
-    scrollRightBtn: document.getElementById("scrollRightBtn"),
+    exitButton: document.getElementById("exitButton"),
     workoutDaysElement: document.getElementById("workout-days"),
     workoutBarChartCanvas: document.getElementById("workoutBarChartCanvas"),
     sleepChartCanvas: document.getElementById("sleepChartCanvas"),
-    loginButton: document.getElementById("loginButton"),
-    loginPopup: document.getElementById("loginPopup"),
-    closePopup: document.getElementById("closePopup"), 
+    loginButton: document.getElementById("loginButton"), 
   };
 
 // Function to sign in with Discord
@@ -137,13 +133,20 @@ const initializeAuthButtons = async () => {
     }
 
 
-    //Open hamburgermenu
+    //Show mobile menu
+    const showMenu = () => {
+      mobileMenu.classList.remove('hidden');
+    };
 
-    function toggleMenu() {
-      mobileMenu.classList.toggle("hidden"); //Toggle hidden to show/hide
+    //Hide mobile menu
+    const hideMenu = () => {
+      mobileMenu.classList.add('hidden');
     }
 
-    hamburgerButton.addEventListener("click", toggleMenu);
-    exitButton.addEventListener("click", toggleMenu);
+    //Open Menu
+    hamburgerButton.addEventListener('click', showMenu);
+
+    //Close Menu
+    exitButton.addEventListener('click', hideMenu);
 
   });

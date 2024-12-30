@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Logify</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script type="module" crossorigin src="/assets/index-mjocS-_r.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index--lMPR6Lo.css">
+  <script type="module" crossorigin src="/assets/index-Ds6KHYYB.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-Caq8nGCA.css">
 </head>
-<body class="bg-darkBackground flex flex-col min-h-screen">
+<body class="bg-[#191824] flex flex-col min-h-screen">
     <!--Content wrapper (adjust values in config if needed)-->
   <div id="app" class="container flex flex-1 flex-col">
 
@@ -24,98 +24,75 @@
         </div>
         
         <div class="gap-4 lg:flex md:hidden hidden">
-            <button class="bg-white text-gray-700 px-2 rounded-lg text-xs w-44 shadow-sm"><i class="fa-solid fa-magnifying-glass mr-2"></i>Search</button>
-            <button id="loginButton" class="bg-accentBlue text-white px-2 rounded-lg text-xs w-20 shadow-md hover:bg-custombeige">login</button>
+            <button id="loginButton" class="bg-gradient-to-r from-primary-color to-purple-500 text-white font-bold px-2 rounded-lg text-xs w-40 h-10 shadow-md duration-300 ease-in-out hover:bg-primary-color hover:opacity-90">LOGIN</button>
             <button id="logoutButton" class="bg-accentBlue hidden text-white px-2 rounded-lg text-xs w-20 shadow-md hover:bg-custombeige">logout</button>
         </div> <!-- Hamburger Button (visible on smaller screens) -->
-        <button class="lg:hidden  text-white absolute top-5 right-0" id="hamburgerButton">
+        <button id="hamburgerButton" class="lg:hidden  text-white absolute top-5 right-0" >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </button>
 
 
-        <!-- Login Popup Modal -->
-      <div id="loginPopup" class="hidden fixed inset-0 z-20  flex items-center justify-center bg-black bg-opacity-50">
-        <div class="bg-lightPanel rounded-lg p-8 max-w-sm w-full">
-        <h2 class="text-xl font-bold mb-4">Login</h2>
-        <button id="loginWithDiscord" class="bg-blue-600 text-white px-4 py-2 rounded w-full">
-          Login with Discord
-        </button>
-        <form id="loginForm">
-        <label class="block mb-2">
-        Email: <input type="email" id="email" class="border rounded w-full px-2 py-1" required />
-        </label>
-        <label class="block mb-4">
-        Password: <input type="password" id="password" class="border rounded w-full px-2 py-1" required />
-        </label>
-      <div class="flex justify-between">
-        <button type="submit" class="btn">Log In</button>
-        <button type="button" id="closePopup" class="btn">Cancel</button>
-      </div>
-    </form>
-  </div>
-</div>
-
         <!-- Mobile Menu (hidden by default, shown when the hamburger is clicked) -->
-        <div class="lg:hidden hidden relative bg-lightPanel py-2 w-[200px] font-semibold" id="mobileMenu">
-          <div class="flex justify-end px-2 cursor-pointer">
-            <button id="exitButton">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-          <div class="flex items-center gap-2 w-full hover:bg-gray-700 px-2">
-            <i class="fa-solid fa-house"></i>
-            <a href="#" class="block text-white py-2">Home</a>
-          </div>
-          <div class="flex items-center gap-2 w-full hover:bg-gray-700 px-2">
-            <i class="fa-solid fa-house"></i>
-            <a href="#" class="block text-white py-2">Workouts</a>
-          </div>
-          <div class="flex items-center gap-2 w-full hover:bg-gray-700 px-2">
-            <i class="fa-solid fa-house"></i>
-            <a href="#" class="block text-white py-2">Stats</a>
-          </div>
-          <div class="flex items-center gap-2 w-full hover:bg-gray-700 px-2">
-            <i class="fa-solid fa-house"></i>
-            <a href="#" class="block text-white py-2">Settings</a>
+        <div id="mobileMenu" class="lg:hidden hidden relative">
+          <div class="lg:hidden hidden absolute bg-[#252430] py-2 w-[200px] font-semibold">
+            <div class="flex justify-end px-2 cursor-pointer">
+              <button id="exitButton"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="flex items-center gap-2 w-full hover:text-white  px-2">
+              <i class="fa-solid fa-house"></i>
+              <a href="#" class="block text-white py-2">Home</a>
+            </div>
+            <div class="flex items-center gap-2 w-full  px-2">
+              <i class="fa-solid fa-house"></i>
+              <a href="#" class="block text-white py-2">Workouts</a>
+            </div>
+            <div class="flex items-center gap-2 w-full  px-2">
+              <i class="fa-solid fa-house"></i>
+              <a href="#" class="block text-white py-2">Stats</a>
+            </div>
+            <div class="flex items-center gap-2 w-full  px-2">
+              <i class="fa-solid fa-house"></i>
+              <a href="#" class="block text-white py-2">Settings</a>
+            </div>
           </div>
         </div>
       </nav>
 
     <!--Start of grid-->
-    <div class="flex flex-col justify-center lg:grid lg:grid-cols-6 gap-2 mt-24 flex-1">
+    <div class="flex flex-col justify-center lg:grid lg:grid-cols-6 gap-4 mt-24 flex-1">
 
       <!-- Sidebar -->
-    <nav class="bg-lightPanel lg:flex sm:hidden hidden col-span-1 text-white w-20 rounded-lg flex flex-col items-center justify-between pt-6 ">
+    <nav class="bg-[#252430] ring-2 ring-white/10 lg:flex sm:hidden hidden col-span-1 text-white w-20 rounded-lg flex flex-col items-center justify-between pt-6 ">
       <!-- Logo -->
-      <div class="w-10 h-10 mb-6 bg-lime-500 rounded-full flex items-center justify-center cursor-pointer">
+      <div class="w-10 h-10 mb-6 bg-[#9f7aea] hover:scale-110 rounded-full flex items-center justify-center cursor-pointer">
         <span class="text-xl font-bold">C</span>
       </div>
       
       <!-- Sidebar Navigation Links -->
       <div class="space-y-6 w-full">
-          <a href="#" class="flex flex-col items-center hover:bg-gray-700  text-gray-300 hover:text-white">
+          <a href="#" class="flex flex-col items-center   text-gray-300 hover:text-white">
             <i class="fa-solid fa-chart-line text-lg"></i>
-            <span class="text-xs">Stats</span>
+            <span class="text-xs hover:text-white">Stats</span>
           </a>
-          <a href="#" class="flex flex-col items-center hover:bg-gray-700  text-gray-300 hover:text-white">
+          <a href="#" class="flex flex-col items-center  text-gray-300 hover:text-white">
             <i class="fa-solid fa-dumbbell text-lg"></i>
-            <span class="text-xs">Workouts</span>
+            <span class="text-xs hover:text-white">Workouts</span>
           </a>
-          <a href="#" class="flex flex-col items-center hover:bg-gray-700  text-gray-300 hover:text-white">
+          <a href="#" class="flex flex-col items-center   text-gray-300 hover:text-white">
             <i class="fa-solid fa-calendar-days text-lg"></i>
-            <span class="text-xs">Calendar</span>
+            <span class="text-xs hover:text-white">Calendar</span>
           </a>
-        <a href="#" class="flex flex-col items-center pb-2 hover:bg-gray-700 min-w-full text-gray-300 hover:text-white">
+        <a href="#" class="flex flex-col items-center pb-2  min-w-full text-gray-300 hover:text-white">
           <i class="fa-solid fa-cog text-lg"></i>
-          <span class="text-xs">Settings</span>
+          <span class="text-xs hover:text-white">Settings</span>
         </a>
       </div>
       </nav>   
 
       <!--Chart Card-->
-        <div class="bg-lightPanel text-white rounded-lg font-bold lg:col-span-3 py-2 px-4 shadow-md">
+        <div class="bg-[#252430] ring-2 ring-white/10 text-white rounded-lg font-bold lg:col-span-3 py-2 px-4 shadow-md">
             <div class="card bg-beige p-6 rounded-lg gap-6">
                 <!-- Text Content -->
                 <div class="text-content whitespace-nowrap h-full">
@@ -134,7 +111,7 @@
         </div>
 
         <!--Activity Tracker Card-->
-        <div class="bg-accentBlue text-white rounded-lg col-span-2 py-4 px-4 font-bold shadow-md flex justify-center items-center">
+        <div class="bg-[#252430] ring-2 ring-white/10 text-white rounded-lg col-span-2 py-4 px-4 font-bold shadow-md flex justify-center items-center">
             <!--Header-->
             <div>
                 <div class="mb-4 justify-center items-center flex">
@@ -152,7 +129,7 @@
         </div>
 
         <!--Sleep Time -->
-        <div class="bg-lightPanel col-start-2 col-span-2 row-span-1 py-4 px-4 rounded-lg shadow-md text-white">
+        <div class="bg-[#252430] ring-2 ring-white/10 col-start-2 col-span-2 row-span-1 py-4 px-4 rounded-lg shadow-md text-white">
           <div class="flex flex-col justify-between h-full">
             <div class="flex justify-between">
               <p class="font-bold">Sleep Time</p>
@@ -166,7 +143,7 @@
         </div>
         
         <!--My Activities Card-->
-        <div class="bg-lightPanel relative flex flex-col text-white col-span-3 row-span-2 py-4 px-4 rounded-lg shadow-md font-bold">
+        <div class="bg-[#252430] ring-2 ring-white/10 relative flex flex-col text-white col-span-3 row-span-2 py-4 px-4 rounded-lg shadow-md font-bold">
           <div class="flex justify-between mb-4">
             <h1 class="font-bold">My Activities</h1>
             <div class="flex justify-center items-center cursor-pointer">
@@ -176,7 +153,7 @@
           <div id="scrollContainer" class="flex flex-col lg:items-center lg:flex-row gap-1 lg:w-full lg:h-full overflow-x-auto whitespace-nowrap scroll-smooth">
             <i id="scrollLeftBtn" class="fa-solid fa-chevron-left sm:hidden hidden md:top-12 lg:flex absolute left-3 top-14 bg-gray-800 hover:bg-blue-500 rounded-sm py-1 px-2 cursor-pointer"></i>
             <!--First card-->
-            <div id="child" class="bg-darkBackground hover:bg-gray-800 flex flex-col justify-between lg:h-60  px-4 py-2 rounded-lg text-white font-thin lg:flex-1 ">
+            <div id="child" class="bg-[#1A1B1F] hover:bg-gray-800 flex flex-col justify-between lg:h-60  px-4 py-2 rounded-lg text-white font-thin lg:flex-1 ">
               <div class="flex justify-between">
                 <div class="">
                   <i class="fa-solid fa-person-running"></i>
@@ -189,7 +166,7 @@
               </div>
             </div>
             <!--Second card-->
-            <div id="child" class="bg-darkBackground hover:bg-gray-800 flex flex-col justify-between lg:h-60 px-4 py-2 rounded-lg text-white font-thin lg:flex-1  ">
+            <div id="child" class="bg-[#1A1B1F] hover:bg-gray-800 flex flex-col justify-between lg:h-60 px-4 py-2 rounded-lg text-white font-thin lg:flex-1  ">
               <div class="flex justify-between">
                 <div class="">
                   <i class="fa-solid fa-person-running"></i>
@@ -202,7 +179,7 @@
               </div>
             </div>
             <!--Third card-->
-            <div id="child" class="bg-darkBackground hover:bg-gray-800 flex flex-col justify-between lg:h-60 px-4 py-2 rounded-lg text-white font-thin lg:flex-1">
+            <div id="child" class="bg-[#1A1B1F] hover:bg-gray-800 flex flex-col justify-between lg:h-60 px-4 py-2 rounded-lg text-white font-thin lg:flex-1">
               <div class="flex justify-between">
                 <div class="">
                   <i class="fa-solid fa-person-running"></i>
@@ -219,14 +196,14 @@
         </div>
         
         <!--Weightloss card-->
-        <div class="bg-lightPanel col-start-2 col-span-2 row-span-1 py-2 px-4 rounded-lg text-white shadow-md">
+        <div class="bg-[#252430] ring-2 ring-white/10 col-start-2 col-span-2 row-span-1 py-2 px-4 rounded-lg text-white shadow-md">
           <div class="flex flex-col h-full justify-center items-center ">
             <p>Weight Loss Goal</p>
             <div class="p-4 rounded-lg w-full max-w-lg">
               <!-- Progress Bar Container -->
               <div class="relative h-4 bg-gray-600 rounded-full overflow-hidden">
                 <!-- Progress -->
-                <div class="absolute h-full bg-lime-500 rounded-full" style="width: 70%;"></div>
+                <div class="absolute h-full bg-[#F29559] rounded-full" style="width: 65%;"></div>
               </div>
               <!-- Labels -->
               <div class="flex justify-between mt-2 text-sm ">
@@ -243,18 +220,15 @@
   </div><!--End of wrapper-->
 
    <!--Footer-->
-   <footer class="w-full h-full bg-lightPanel text-white py-4 px-12 mt-20">
-    <div class="w-full h-full flex justify-between">
-      <div><h1>Logify</h1></div>
-      <div class="flex flex-col items-center">
-        <h1>Contact</h1>
-        <p>Insert email here</p>
-      </div>
-      <div class="items-center flex flex-col">
-        <h2>About us</h2>
-        <ul>
-          <li>Ålesund</li>
-        </ul>
+   <footer class="w-full h-full bg-[#252430] text-white py-4 px-12 mt-20">
+    <div class="w-full h-full flex justify-between items-center">
+      <div>
+        <h1 class="text-2xl font-bold">Logify</h1>
+        </div>
+      <div class="flex gap-4">
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-youtube"></i>
       </div>
     </div>
   </footer>
