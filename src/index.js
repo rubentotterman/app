@@ -127,7 +127,7 @@ const initializeAuthButtons = async () => {
         data: {
           labels: ["Calories Intake", "Calories Burned", "Activity Time"],
           datasets: [
-            { label: "Workout Metrics", data: [800, 850, 400], backgroundColor: ["#23262C", "#9E2835", "#000000"] },
+            { label: "Workout Metrics", data: [800, 850, 400], backgroundColor: ["#F29559", "#9E2835", "#78e3fd"] },
           ],
         },
         options: { responsive: true, plugins: { legend: { display: false } } },
@@ -140,7 +140,7 @@ const initializeAuthButtons = async () => {
         type: "bar",
         data: {
           labels: ["Actual", "Goal"],
-          datasets: [{ label: "Sleep Time", data: [6, 8], backgroundColor: ["rgba(54,162,235,0.2)", "rgba(255,206,86,0.2)"] }],
+          datasets: [{ label: "Sleep Time", data: [6, 8], backgroundColor: ["#78e3fd", "rgba(255,206,86,0.2)"] }],
         },
         options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } },
       });

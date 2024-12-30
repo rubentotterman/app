@@ -18,5 +18,21 @@ html, body {
     height: 100%;
     margin: 0;
   }
+
+  :root {
+    --primary-color: #3490dc; /* Replace with your actual primary color */
+  }
+  
+  .from-primary-color {
+    --tw-gradient-from: var(--primary-color) var(--tw-gradient-from-position);
+    --tw-gradient-to: hsla(0, 0%, 100%, 0) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  }
+  
+  .to-purple-500 {
+    --tw-gradient-to: #9f7aea; /* Purple 500 color */
+  }
+  
+  
   
 

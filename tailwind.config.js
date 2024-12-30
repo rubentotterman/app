@@ -47,6 +47,11 @@ module.exports = {
         softBlue: '#2C3BFF',
         lightGreen: '#D4FF80',
         borderGray: '#4D4D4D',
+        'primary-color': 'var(--primary-color)', // Use the CSS variable for the primary
+        gradientColorStops: {
+          'primary': 'var(--primary-color)',
+          'white-fade': 'hsla(0, 0%, 100%, 0)', // Transparent white for gradient fade
+        },
       },
     },
   },
