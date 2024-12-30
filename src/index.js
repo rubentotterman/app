@@ -110,15 +110,7 @@ const initializeAuthButtons = async () => {
     
 
 
-    // Popup handling
-    elements.loginButton?.addEventListener("click", () => {
-      elements.loginPopup?.classList.remove("hidden");
-    });
-
-    elements.closePopup?.addEventListener("click", () => {
-      elements.loginPopup?.classList.add("hidden");
-    });
-
+   
     // Charts
     if (elements.workoutBarChartCanvas) {
       const ctx = elements.workoutBarChartCanvas.getContext("2d");
