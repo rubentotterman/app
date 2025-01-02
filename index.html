@@ -10,224 +10,247 @@
 <body class="bg-[#191824] flex flex-col min-h-screen">
     <!--Content wrapper-->
   <div id="app" class="container relative flex flex-1 flex-col md:px-12">
+  <div id="content"> 
 
-    <!--Navbar content-->
-    <nav class="navbar justify-between text text-white pt-5 relative flex">
-        <div class="flex flex-col justify-center">
-            <h1 id="basicHello" class="font-bold text-2xl ">Welcome to Logify</h1>
-            <div id="userWelcome" class="hidden flex flex-col">
-            <h1 class="font-bold text-2xl">Welcome, Charlotte</h1>
-            <p class="text-xs font-semibold">Lets take a look at your activity</p>
-            </div>
-            
-        </div>
-        
-        <div class="gap-4 lg:flex md:hidden hidden">
-            <button id="loginButton" class="bg-gradient-to-r from-primary-color to-purple-500 text-white font-bold px-2 rounded-lg text-xs w-40 h-10 shadow-md duration-300 ease-in-out hover:bg-primary-color hover:opacity-90">LOGIN</button>
-            <button id="logoutButton" class="bg-accentBlue hidden text-white px-2 rounded-lg text-xs w-20 shadow-md hover:bg-custombeige">logout</button>
-        </div> <!-- Hamburger Button (visible on smaller screens) -->
-        <button id="hamburgerButton" class="lg:hidden  text-white absolute top-5 right-0" >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
+    <!-- Dashboard section-->
+  <div id="dashboard-section">
 
-
-        <!-- Mobile Menu (hidden by default, shown when the hamburger is clicked) -->
-        <div id="mobileMenu" class="lg:hidden hidden ring-4 ring-purple-950/10 fixed top-0 right-0 h-full w-64 z-40 bg-[#252430] transform translate-x-full translate-x-0 transition-transform duration-300">
-          <div class="flex justify-end px-6 py-2 cursor-pointer text-white">
-            <button id="exitButton"><i class="fa-solid fa-xmark"></i></button>
+     <!--Navbar content-->
+     <nav class="navbar justify-between text text-white pt-5 relative flex">
+      <div class="flex flex-col justify-center">
+          <h1 id="basicHello" class="font-bold text-2xl ">Welcome to Logify</h1>
+          <div id="userWelcome" class="hidden flex flex-col">
+          <h1 class="font-bold text-2xl">Welcome, Charlotte</h1>
+          <p class="text-xs font-semibold">Lets take a look at your activity</p>
           </div>
-          <div class="flex font-semibold text-gray-800 min-h-full">
-            <div class="flex flex-col w-full justify-between">
-              <div>
-                <div class="flex items-center gap-2 w-full px-2 text-white">
-                  <i class="fa-solid fa-house"></i>
-                  <a href="#" class="block py-2">Home</a>
-                </div>
-                <div class="flex items-center gap-2 w-full  px-2 text-white">
-                  <i class="fa-solid fa-person-running"></i>
-                  <a href="#" class="block  py-2">Workouts</a>
-                </div>
-                <div class="flex items-center gap-2 w-full px-2 text-white">
-                  <i class="fa-solid fa-chart-simple"></i>
-                  <a href="#" class="block py-2">Stats</a>
-                </div>
+          
+      </div>
+      
+      <div class="gap-4 lg:flex md:hidden hidden">
+          <button id="loginButton" class="bg-gradient-to-r from-primary-color to-purple-500 text-white font-bold px-2 rounded-lg text-xs w-40 h-10 shadow-md duration-300 ease-in-out hover:bg-primary-color hover:opacity-90">LOGIN</button>
+          <button id="logoutButton" class="bg-accentBlue hidden text-white px-2 rounded-lg text-xs w-20 shadow-md hover:bg-custombeige">logout</button>
+      </div> <!-- Hamburger Button (visible on smaller screens) -->
+      <button id="hamburgerButton" class="lg:hidden  text-white absolute top-5 right-0" >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
+
+      <!-- Mobile Menu (hidden by default, shown when the hamburger is clicked) -->
+      <div id="mobileMenu" class="lg:hidden hidden ring-4 ring-purple-950/10 fixed top-0 right-0 h-full w-64 z-40 bg-[#252430] transform translate-x-full translate-x-0 transition-transform duration-300">
+        <div class="flex justify-end px-6 py-2 cursor-pointer text-white">
+          <button id="exitButton"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="flex font-semibold text-gray-800 min-h-full">
+          <div class="flex flex-col w-full justify-between">
+            <div>
+              <div class="flex items-center gap-2 w-full px-2 text-white">
+                <i class="fa-solid fa-house"></i>
+                <a href="#" class="block py-2">Home</a>
               </div>
-                <div class="flex items-center gap-2 w-full px-2 text-white mb-12">
-                  <i class="fa-solid fa-gear"></i>
-                  <a href="#" class="block  py-2">Settings</a>
-                </div>
+              <div class="flex items-center gap-2 w-full  px-2 text-white">
+                <i class="fa-solid fa-person-running"></i>
+                <a href="#" class="block  py-2">Workouts</a>
+              </div>
+              <div class="flex items-center gap-2 w-full px-2 text-white">
+                <i class="fa-solid fa-chart-simple"></i>
+                <a href="#" class="block py-2">Stats</a>
+              </div>
             </div>
+              <div class="flex items-center gap-2 w-full px-2 text-white mb-12">
+                <i class="fa-solid fa-gear"></i>
+                <a href="#" class="block  py-2">Settings</a>
+              </div>
           </div>
         </div>
-      </nav>
+      </div>
+    </nav>
 
     <!--Start of grid-->
     <div class="flex flex-col justify-center lg:grid lg:grid-cols-6 gap-4 mt-24 flex-1">
 
       <!-- Sidebar -->
-    <nav class="bg-[#252430] ring-2 ring-white/10 lg:flex sm:hidden hidden col-span-1 text-white w-20 rounded-lg flex flex-col items-center justify-between pt-6 pb-6 ">
-      <!-- Logo -->
-      <div class="w-10 h-10 mb-12 bg-[#9f7aea] hover:scale-110 rounded-full flex items-center justify-center cursor-pointer">
-        <span class="text-xl font-bold">C</span>
-      </div>
-      
-      <!-- Sidebar Navigation Links -->
-      <div class="space-y-6 w-full">
-          <a href="#" class="flex flex-col items-center   text-gray-300 hover:text-white">
-            <i class="fa-solid fa-chart-line text-lg"></i>
-            <span class="text-xs hover:text-white">Stats</span>
-          </a>
-          <a href="#" class="flex flex-col items-center  text-gray-300 hover:text-white">
-            <i class="fa-solid fa-dumbbell text-lg"></i>
-            <span class="text-xs hover:text-white">Workouts</span>
-          </a>
-          <a href="#" class="flex flex-col items-center   text-gray-300 hover:text-white">
-            <i class="fa-solid fa-calendar-days text-lg"></i>
-            <span class="text-xs hover:text-white">Calendar</span>
-          </a>
-        <a href="#" class="flex flex-col items-center pb-2  min-w-full text-gray-300 hover:text-white">
-          <i class="fa-solid fa-cog text-lg"></i>
-          <span class="text-xs hover:text-white">Settings</span>
+      <nav class="bg-[#252430] ring-2 ring-white/10 lg:flex sm:hidden hidden col-span-1 text-white w-20 rounded-lg flex flex-col items-center justify-between pt-6 pb-6 ">
+    <!-- Logo -->
+    <div class="w-10 h-10 mb-12 bg-[#9f7aea] hover:scale-110 rounded-full flex items-center justify-center cursor-pointer">
+      <span class="text-xl font-bold">C</span>
+    </div>
+    
+    <!-- Sidebar Navigation Links -->
+    <div class="space-y-6 w-full">
+      <a href="/dashboard" id="dashboard" class="flex flex-col items-center   text-gray-300 hover:text-white">
+        <i class="fa-solid fa-chart-line text-lg"></i>
+        <span class="text-xs hover:text-white">dashboard</span>
+      </a>
+        <a href="/stats" id="stats" class="flex flex-col items-center   text-gray-300 hover:text-white">
+          <i class="fa-solid fa-chart-line text-lg"></i>
+          <span class="text-xs hover:text-white">Stats</span>
         </a>
-      </div>
+        <a href="/workouts" id="workouts" class="flex flex-col items-center  text-gray-300 hover:text-white">
+          <i class="fa-solid fa-dumbbell text-lg"></i>
+          <span class="text-xs hover:text-white">Workouts</span>
+        </a>
+        <a href="/calendar" id="calendar" class="flex flex-col items-center   text-gray-300 hover:text-white">
+          <i class="fa-solid fa-calendar-days text-lg"></i>
+          <span class="text-xs hover:text-white">Calendar</span>
+        </a>
+      <a href="/settings" id="settings" class="flex flex-col items-center pb-2  min-w-full text-gray-300 hover:text-white">
+        <i class="fa-solid fa-cog text-lg"></i>
+        <span class="text-xs hover:text-white">Settings</span>
+      </a>
+    </div>
       </nav>   
 
       <!--Chart Card-->
-        <div class="bg-[#252430] ring-2 ring-white/10 text-white rounded-lg font-bold lg:col-span-3 py-2 px-4 shadow-md">
-            <div class="card bg-beige p-6 rounded-lg gap-6">
-                <!-- Text Content -->
-                <div class="text-content whitespace-nowrap h-full">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h2 class="text-lg font-bold">Your Workout</h2>
-                            <p class="text-sm font-semibold">Results for Today</p>
-                        </div>
-                        <i class="fa-regular fa-calendar cursor-pointer"></i>
-                    </div>
-                </div>
-                <div class="chart-container mt-6 flex items-center justify-center">
-                    <canvas id="workoutBarChartCanvas"></canvas>
+      <div class="bg-[#252430] ring-2 ring-white/10 text-white rounded-lg font-bold lg:col-span-3 py-2 px-4 shadow-md">
+          <div class="card bg-beige p-6 rounded-lg gap-6">
+              <!-- Text Content -->
+              <div class="text-content whitespace-nowrap h-full">
+                  <div class="flex justify-between items-center">
+                      <div>
+                          <h2 class="text-lg font-bold">Your Workout</h2>
+                          <p class="text-sm font-semibold">Results for Today</p>
+                      </div>
+                      <i class="fa-regular fa-calendar cursor-pointer"></i>
                   </div>
               </div>
-        </div>
-
-        <!--Activity Tracker Card-->
-        <div class="bg-[#252430] ring-2 ring-white/10 text-white rounded-lg col-span-2 py-4 px-4 font-bold shadow-md flex justify-center items-center">
-            <!--Header-->
-            <div>
-                <div class="mb-4 justify-center items-center flex">
-                    <h1>Activity Tracker</h1>
-                </div>
-                 <!-- Workout Days Circle -->
-                  
-                <div id="workout-circle" class=" w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-lightPanel shadow-md flex items-center justify-center">
-                    <div class="flex flex-col justify-center items-center gap-2">
-                        <p id="workoutDaysElement" class="text-2xl font-semibold text-white"></p>
-                         <i class="fa-solid fa-fire text-orange-500"></i>
-                    </div>
+              <div class="chart-container mt-6 flex items-center justify-center">
+                  <canvas id="workoutBarChartCanvas"></canvas>
                 </div>
             </div>
-        </div>
+      </div>
 
-        <!--Sleep Time -->
-        <div class="bg-[#252430] ring-2 ring-white/10 col-start-2 col-span-2 row-span-1 py-4 px-4 rounded-lg shadow-md text-white">
-          <div class="flex flex-col justify-between h-full">
+      <!--Activity Tracker Card-->
+      <div class="bg-[#252430] ring-2 ring-white/10 text-white rounded-lg col-span-2 py-4 px-4 font-bold shadow-md flex justify-center items-center">
+          <!--Header-->
+          <div>
+              <div class="mb-4 justify-center items-center flex">
+                  <h1>Activity Tracker</h1>
+              </div>
+               <!-- Workout Days Circle -->
+                
+              <div id="workout-circle" class=" w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-lightPanel shadow-md flex items-center justify-center">
+                  <div class="flex flex-col justify-center items-center gap-2">
+                      <p id="workoutDaysElement" class="text-2xl font-semibold text-white"></p>
+                       <i class="fa-solid fa-fire text-orange-500"></i>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!--Sleep Time -->
+      <div class="bg-[#252430] ring-2 ring-white/10 col-start-2 col-span-2 row-span-1 py-4 px-4 rounded-lg shadow-md text-white">
+        <div class="flex flex-col justify-between h-full">
+          <div class="flex justify-between">
+            <p class="font-bold">Sleep Time</p>
+            <i class="fa-solid fa-pen-to-square cursor-pointer"></i>
+          </div>
+          <div>
+            <p>Goal: <span class="font-bold">8 hours</span></p>
+            <canvas id="sleepChartCanvas" class="h-48 w-full mt-2"></canvas>
+          </div>
+        </div>
+      </div>
+      
+      <!--My Activities Card-->
+      <div class="bg-[#252430] ring-2 ring-white/10 relative flex flex-col text-white col-span-3 row-span-2 py-4 px-4 rounded-lg shadow-md font-bold">
+        <div class="flex justify-between mb-4">
+          <h1 class="font-bold">My Activities</h1>
+          <div class="flex justify-center items-center cursor-pointer">
+            <button class="bg-gradient-to-r from-primary-color to-purple-500 text-white font-bold px-2 rounded-sm text-xs h-8 shadow-md duration-300 ease-in-out hover:bg-primary-color hover:opacity-90"></i>Add<i class="fa-solid fa-plus ml-2"></i></button>
+          </div>
+        </div>
+        <div id="scrollContainer" class="flex flex-col lg:items-center lg:flex-row gap-1 lg:w-full lg:h-full overflow-x-auto whitespace-nowrap scroll-smooth">
+
+          <!--First card-->
+          <div id="child" class="bg-[#1A1B1F] hover:bg-gray-800 flex flex-col justify-between lg:h-60  px-4 py-2 rounded-lg text-white font-thin lg:flex-1 ">
             <div class="flex justify-between">
-              <p class="font-bold">Sleep Time</p>
-              <i class="fa-solid fa-pen-to-square cursor-pointer"></i>
+              <div class="">
+                <i class="fa-solid fa-person-running"></i>
+              </div>
+              <i class="fa-solid fa-chevron-up"></i>
             </div>
-            <div>
-              <p>Goal: <span class="font-bold">8 hours</span></p>
-              <canvas id="sleepChartCanvas" class="h-48 w-full mt-2"></canvas>
+            <div class="flex justify-between gap-4">
+              <p class="font-thin">Cardio</p>
+              <p class="font-bold">5km</p>
             </div>
           </div>
-        </div>
+          <!--Second card-->
+          <div id="child" class="bg-[#1A1B1F] hover:bg-gray-800 flex flex-col justify-between lg:h-60 px-4 py-2 rounded-lg text-white font-thin lg:flex-1  ">
+            <div class="flex justify-between">
+              <div class="">
+                <i class="fa-solid fa-person-running"></i>
+              </div>
+              <i class="fa-solid fa-chevron-up"></i>
+            </div>
+            <div class="flex justify-between gap-4">
+              <p class="font-thin">Cardio</p>
+              <p class="font-bold">5km</p>
+            </div>
+          </div>
+          <!--Third card-->
+          <div id="child" class="bg-[#1A1B1F] hover:bg-gray-800 flex flex-col justify-between lg:h-60 px-4 py-2 rounded-lg text-white font-thin lg:flex-1">
+            <div class="flex justify-between">
+              <div class="">
+                <i class="fa-solid fa-person-running"></i>
+              </div>
+              <i class="fa-solid fa-chevron-up"></i>
+            </div>
+            <div class="flex justify-between gap-4">
+              <p class="font-thin">Cardio</p>
+              <p class="font-bold">5km</p>
+            </div>
+          </div>
         
-        <!--My Activities Card-->
-        <div class="bg-[#252430] ring-2 ring-white/10 relative flex flex-col text-white col-span-3 row-span-2 py-4 px-4 rounded-lg shadow-md font-bold">
-          <div class="flex justify-between mb-4">
-            <h1 class="font-bold">My Activities</h1>
-            <div class="flex justify-center items-center cursor-pointer">
-              <button class="bg-gradient-to-r from-primary-color to-purple-500 text-white font-bold px-2 rounded-sm text-xs h-8 shadow-md duration-300 ease-in-out hover:bg-primary-color hover:opacity-90"></i>Add<i class="fa-solid fa-plus ml-2"></i></button>
+      </div>
+      </div>
+      
+      <!--Weightloss card-->
+      <div class="bg-[#252430] ring-2 ring-white/10 col-start-2 col-span-2 row-span-1 py-2 px-4 rounded-lg text-white shadow-md">
+        <div class="flex flex-col h-full justify-center items-center ">
+          <p>Weight Loss Goal</p>
+          <div class="p-4 rounded-lg w-full max-w-lg">
+            <!-- Progress Bar Container -->
+            <div class="relative h-4 bg-gray-600 rounded-full overflow-hidden">
+              <!-- Progress -->
+              <div class="absolute h-full bg-[#F29559] rounded-full" style="width: 65%;"></div>
+            </div>
+            <!-- Labels -->
+            <div class="flex justify-between mt-2 text-sm ">
+              <span>50kg</span>
+              <span>70kg</span>
             </div>
           </div>
-          <div id="scrollContainer" class="flex flex-col lg:items-center lg:flex-row gap-1 lg:w-full lg:h-full overflow-x-auto whitespace-nowrap scroll-smooth">
-  
-            <!--First card-->
-            <div id="child" class="bg-[#1A1B1F] hover:bg-gray-800 flex flex-col justify-between lg:h-60  px-4 py-2 rounded-lg text-white font-thin lg:flex-1 ">
-              <div class="flex justify-between">
-                <div class="">
-                  <i class="fa-solid fa-person-running"></i>
-                </div>
-                <i class="fa-solid fa-chevron-up"></i>
-              </div>
-              <div class="flex justify-between gap-4">
-                <p class="font-thin">Cardio</p>
-                <p class="font-bold">5km</p>
-              </div>
-            </div>
-            <!--Second card-->
-            <div id="child" class="bg-[#1A1B1F] hover:bg-gray-800 flex flex-col justify-between lg:h-60 px-4 py-2 rounded-lg text-white font-thin lg:flex-1  ">
-              <div class="flex justify-between">
-                <div class="">
-                  <i class="fa-solid fa-person-running"></i>
-                </div>
-                <i class="fa-solid fa-chevron-up"></i>
-              </div>
-              <div class="flex justify-between gap-4">
-                <p class="font-thin">Cardio</p>
-                <p class="font-bold">5km</p>
-              </div>
-            </div>
-            <!--Third card-->
-            <div id="child" class="bg-[#1A1B1F] hover:bg-gray-800 flex flex-col justify-between lg:h-60 px-4 py-2 rounded-lg text-white font-thin lg:flex-1">
-              <div class="flex justify-between">
-                <div class="">
-                  <i class="fa-solid fa-person-running"></i>
-                </div>
-                <i class="fa-solid fa-chevron-up"></i>
-              </div>
-              <div class="flex justify-between gap-4">
-                <p class="font-thin">Cardio</p>
-                <p class="font-bold">5km</p>
-              </div>
-            </div>
           
-        </div>
-        </div>
-        
-        <!--Weightloss card-->
-        <div class="bg-[#252430] ring-2 ring-white/10 col-start-2 col-span-2 row-span-1 py-2 px-4 rounded-lg text-white shadow-md">
-          <div class="flex flex-col h-full justify-center items-center ">
-            <p>Weight Loss Goal</p>
-            <div class="p-4 rounded-lg w-full max-w-lg">
-              <!-- Progress Bar Container -->
-              <div class="relative h-4 bg-gray-600 rounded-full overflow-hidden">
-                <!-- Progress -->
-                <div class="absolute h-full bg-[#F29559] rounded-full" style="width: 65%;"></div>
-              </div>
-              <!-- Labels -->
-              <div class="flex justify-between mt-2 text-sm ">
-                <span>50kg</span>
-                <span>70kg</span>
-              </div>
-            </div>
-            
-            <p><span class="font-bold"> 80% </span> completed</p>
-          </div>  
-        </div>
-
+          <p><span class="font-bold"> 80% </span> completed</p>
+        </div>  
+      </div>
     </div><!--End of grid-->
-  </div><!--End of wrapper-->
+  </div>
 
+    <div id="stats-section" class="hidden">
+      <h1 class="text-2xl font-bold text-white">Your Stats</h1>
+      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="p-4 bg-blue-100 rounded shadow">
+          <h2 class="text-xl font-semibold">Workouts Completed</h2>
+          <p class="text-gray-700 text-4xl font-bold">10</p>
+        </div>
+        <div class="p-4 bg-green-100 rounded shadow">
+          <h2 class="text-xl font-semibold">Total Hours Exercised</h2>
+          <p class="text-gray-700 text-4xl font-bold">15</p>
+        </div>
+      </div>
+    </div>
+  </div><!--End of Content-->
+  </div> <!--End of Wrapper-->
+   
    <!--Footer-->
-   <footer class="w-full h-full bg-[#252430] text-white py-4 px-12 mt-20">
+  <footer class="w-full hidden h-full bg-[#252430] text-white py-4 px-12 mt-20">
     <div class="w-full h-full flex justify-between items-center">
       <div>
         <h1 class="text-2xl font-bold">Logify</h1>
-        </div>
+      </div>
       <div class="flex gap-4">
         <i class="fa-brands fa-instagram"></i>
         <i class="fa-brands fa-facebook"></i>

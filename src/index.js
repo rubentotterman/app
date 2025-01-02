@@ -22,6 +22,45 @@ document.addEventListener("DOMContentLoaded", async () => {
     loginButton: document.getElementById("loginButton"), 
   };
 
+  const sections = {
+    dashboard: document.getElementById('dashboard-section'),
+    stats: document.getElementById('stats-section'),
+  };
+  
+  function showSection(section) {
+    Object.keys(sections).forEach((key) => {
+      if (key === section) {
+        sections[key].classList.remove('hidden'); // Show the active section
+      } else {
+        sections[key].classList.add('hidden'); // Hide other sections
+      }
+    });
+  }
+  
+  // Event listeners for navigation
+  document.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault(); // Prevent page reload
+      const page = e.target.id; // Get the page id
+      if (page && sections[page]) {
+        history.pushState({ page }, '', `/${page}`);
+        showSection(page);
+      }
+    });
+  });
+  
+  // Handle browser back/forward navigation
+  window.onpopstate = (event) => {
+    const page = event.state?.page || 'dashboard'; // Default to dashboard
+    showSection(page);
+  };
+  
+  // Initialize the app
+  history.replaceState({ page: 'dashboard' }, '', '/');
+  showSection('dashboard');
+  
+
+
 // Function to sign in with Discord
 async function signInWithDiscord() {
   const { data, error } = await supabase.auth.signInWithOAuth({
