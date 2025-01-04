@@ -280,11 +280,47 @@
       </div>
     </nav>
 
-      <div class="flex flex-col justify-center lg:grid lg:grid-cols-3 gap-4 mt-24 flex-1">
-        <div class="p-4 bg-blue-100 rounded shadow flex flex-col">
+
+      <!--Start of grid-->
+      <div class="flex flex-col justify-center lg:grid lg:grid-cols-4 gap-4 mt-24 flex-1">
+        
+         <!-- Sidebar -->
+      <nav class="bg-[#252430] ring-2 ring-white/10 lg:flex sm:hidden hidden col-span-1 text-white w-20 rounded-lg flex flex-col items-center justify-between pt-6 pb-6 ">
+        <!-- Logo -->
+        <div class="w-10 h-10 mb-12 bg-[#9f7aea] hover:scale-110 rounded-full flex items-center justify-center cursor-pointer">
+          <span class="text-xl font-bold">C</span>
+        </div>
+        
+        <!-- Sidebar Navigation Links -->
+        <div class="space-y-6 w-full">
+          <a href="/dashboard" id="dashboard" class="flex flex-col items-center   text-gray-300 hover:text-white">
+            <i class="fa-solid fa-chart-line text-lg"></i>
+            <span class="text-xs hover:text-white">dashboard</span>
+          </a>
+            <a href="/stats" id="stats" class="flex flex-col items-center   text-gray-300 hover:text-white">
+              <i class="fa-solid fa-chart-line text-lg"></i>
+              <span class="text-xs hover:text-white">Stats</span>
+            </a>
+            <a href="/workouts" id="workouts" class="flex flex-col items-center  text-gray-300 hover:text-white">
+              <i class="fa-solid fa-dumbbell text-lg"></i>
+              <span class="text-xs hover:text-white">Workouts</span>
+            </a>
+            <a href="/calendar" id="calendar" class="flex flex-col items-center   text-gray-300 hover:text-white">
+              <i class="fa-solid fa-calendar-days text-lg"></i>
+              <span class="text-xs hover:text-white">Calendar</span>
+            </a>
+          <a href="/settings" id="settings" class="flex flex-col items-center pb-2  min-w-full text-gray-300 hover:text-white">
+            <i class="fa-solid fa-cog text-lg"></i>
+            <span class="text-xs hover:text-white">Settings</span>
+          </a>
+        </div>
+          </nav> 
+        
+        <!--Sleep tracker card-->
+        <div class="p-4 bg-blue-100 rounded shadow flex flex-col gap-2">
           <h2 class="text-xl font-semibold">Details</h2>
           <h3>Start of sleep:</h3>
-          <div class="flex gap-2 mt-2">
+          <div class="flex gap-2">
             <div>
               <input type="date">
             </div>
@@ -292,9 +328,8 @@
               <input type="time">
             </div>
           </div>
-
           <h3>End of sleep:</h3>
-          <div class="flex gap-2 mt-2">
+          <div class="flex gap-2">
             <div>
               <input type="date">
             </div>
@@ -303,6 +338,7 @@
             </div>
           </div>
         </div>
+
         <div class="p-4 bg-green-100 rounded shadow">
           <h2 class="text-xl font-semibold">Total Hours Exercised</h2>
           <p class="text-gray-700 text-4xl font-bold">15</p>
@@ -311,7 +347,7 @@
           <h2 class="text-xl font-semibold">Total Hours Exercised</h2>
           <p class="text-gray-700 text-4xl font-bold">15</p>
         </div>
-    </div>
+    </div> <!--End of grid-->
   </div>
   </div>
   </div><!--End of Content-->
