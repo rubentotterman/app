@@ -7,9 +7,13 @@ export default defineConfig({
     outDir: 'dist',
   },
   server: {
-    open: true,
-    env: {
-      BROWSER: 'chrome',
+    hmr: {
+      preserveState: true
+    },
+    open: {
+      app: {
+        name: 'chrome'
+      }
     }
   },
 });

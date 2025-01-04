@@ -4,10 +4,21 @@ import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient('https://ynaebzwplirfhvoxrvnz.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InluYWViendwbGlyZmh2b3hydm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQzMDg4NTAsImV4cCI6MjA0OTg4NDg1MH0.Ac6HePbKTdeCVDWAe8KIZOO4iXzIuLODWKRzyhqmfpA');
 
+let workoutChart, sleepChart;
 
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === 'visible') {
+    // Get current path and reinitialize that section
+    const path = window.location.pathname.slice(1) || 'dashboard';
+    if (sections[path]) {
+      showSection(path);
+    }
+  }
+});
 
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("DOMContentLoaded event fired.");
+ 
 
   // Element selections
   const elements = {
@@ -22,15 +33,51 @@ document.addEventListener("DOMContentLoaded", async () => {
     loginButton: document.getElementById("loginButton"), 
   };
 
+  function initializeCharts() {
+    // Destroy existing charts if they exist
+    if (workoutChart) workoutChart.destroy();
+    if (sleepChart) sleepChart.destroy();
+  
+    if (elements.workoutBarChartCanvas) {
+      const ctx = elements.workoutBarChartCanvas.getContext("2d");
+      workoutChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["Calories Intake", "Calories Burned", "Activity Time"],
+          datasets: [
+            { label: "Workout Metrics", data: [800, 850, 400], backgroundColor: ["#F29559", "#9E2835", "#78e3fd"] },
+          ],
+        },
+        options: { responsive: true, plugins: { legend: { display: false } } },
+      });
+    }
+  
+    if (elements.sleepChartCanvas) {
+      const sleepCtx = elements.sleepChartCanvas.getContext("2d");
+      sleepChart = new Chart(sleepCtx, {
+        type: "bar",
+        data: {
+          labels: ["Actual", "Goal"],
+          datasets: [{ label: "Sleep Time", data: [6, 8], backgroundColor: ["#78e3fd", "rgba(255,206,86,0.2)"] }],
+        },
+        options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } },
+      });
+    }
+  }
+
   const sections = {
     dashboard: document.getElementById('dashboard-section'),
     stats: document.getElementById('stats-section'),
   };
   
   function showSection(section) {
+    // Save current section to localStorage
     Object.keys(sections).forEach((key) => {
       if (key === section) {
         sections[key].classList.remove('hidden'); // Show the active section
+        if (key === 'dashboard') {
+          initializeCharts();
+        }
       } else {
         sections[key].classList.add('hidden'); // Hide other sections
       }
@@ -38,26 +85,29 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   
   // Event listeners for navigation
-  document.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault(); // Prevent page reload
-      const page = e.target.id; // Get the page id
-      if (page && sections[page]) {
-        history.pushState({ page }, '', `/${page}`);
-        showSection(page);
-      }
-    });
+document.querySelectorAll('a').forEach((link) => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault(); // Prevent page reload
+    const page = e.target.id; // Get the page id
+    if (page && sections[page]) {
+      history.pushState({ page }, '', `/?page=${page}`);
+      showSection(page);
+    }
   });
+});
   
-  // Handle browser back/forward navigation
-  window.onpopstate = (event) => {
-    const page = event.state?.page || 'dashboard'; // Default to dashboard
-    showSection(page);
-  };
+// Handle browser back/forward navigation
+window.onpopstate = (event) => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const page = urlParams.get('page') || 'dashboard';
+  showSection(page);
+};
   
-  // Initialize the app
-  history.replaceState({ page: 'dashboard' }, '', '/');
-  showSection('dashboard');
+ // Initialize the app
+const urlParams = new URLSearchParams(window.location.search);
+const currentPage = urlParams.get('page') || 'dashboard';
+history.replaceState({ page: currentPage }, '', `/?page=${currentPage}`);
+showSection(currentPage);
   
 
 
@@ -142,34 +192,6 @@ const initializeAuthButtons = async () => {
   // call initialization function on page load
   initializeAuthButtons();
 
-    
-   
-    // Charts
-    if (elements.workoutBarChartCanvas) {
-      const ctx = elements.workoutBarChartCanvas.getContext("2d");
-      new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: ["Calories Intake", "Calories Burned", "Activity Time"],
-          datasets: [
-            { label: "Workout Metrics", data: [800, 850, 400], backgroundColor: ["#F29559", "#9E2835", "#78e3fd"] },
-          ],
-        },
-        options: { responsive: true, plugins: { legend: { display: false } } },
-      });
-    }
-
-    if (elements.sleepChartCanvas) {
-      const sleepCtx = elements.sleepChartCanvas.getContext("2d");
-      new Chart(sleepCtx, {
-        type: "bar",
-        data: {
-          labels: ["Actual", "Goal"],
-          datasets: [{ label: "Sleep Time", data: [6, 8], backgroundColor: ["#78e3fd", "rgba(255,206,86,0.2)"] }],
-        },
-        options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } },
-      });
-    }
 
 
     //Show mobile menu
