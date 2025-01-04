@@ -30,7 +30,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     workoutDaysElement: document.getElementById("workout-days"),
     workoutBarChartCanvas: document.getElementById("workoutBarChartCanvas"),
     sleepChartCanvas: document.getElementById("sleepChartCanvas"),
-    loginButton: document.getElementById("loginButton"), 
+    loginButton: document.getElementById("loginButton"),
+    clickHome: document.getElementById("clickHome"),
   };
 
   function initializeCharts() {
@@ -220,5 +221,11 @@ const initializeAuthButtons = async () => {
         hideMenu();
       }
     }
+
+    //ClickHome
+    document.getElementById('clickHome').addEventListener('click', () => {
+      history.pushState({page: 'dashboard '}, '', '/');
+      showSection('dashboard');
+    })
 
   });
