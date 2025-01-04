@@ -12,18 +12,10 @@
   <div id="app" class="container relative flex flex-1 flex-col md:px-12">
   <div id="content"> 
 
-    <!-- Dashboard section-->
-  <div id="dashboard-section">
-
-     <!--Navbar content-->
-     <nav class="navbar justify-between text text-white pt-5 relative flex">
+    <!--Navbar content-->
+    <nav class="navbar justify-between text text-white pt-5 relative flex">
       <div class="flex flex-col justify-center">
-          <h1 id="basicHello" class="font-bold text-2xl ">Welcome to Logify</h1>
-          <div id="userWelcome" class="hidden flex flex-col">
-          <h1 class="font-bold text-2xl">Welcome, Charlotte</h1>
-          <p class="text-xs font-semibold">Lets take a look at your activity</p>
-          </div>
-          
+        <h1 id="clickHome" class="font-bold text-xl cursor-pointer">Logify</h1>
       </div>
       
       <div class="gap-4 lg:flex md:hidden hidden">
@@ -66,6 +58,10 @@
         </div>
       </div>
     </nav>
+
+    <!-- Dashboard section-->
+  <div id="dashboard-section">
+
 
     <!--Start of grid-->
     <div class="flex flex-col justify-center lg:grid lg:grid-cols-6 gap-4 mt-24 flex-1">
@@ -236,49 +232,8 @@
        <!--Navbar content-->
      <nav class="navbar justify-between text text-white pt-5 relative flex">
       <div class="flex flex-col justify-center">
-          <h1 id="clickHome" class="font-bold text-2xl cursor-pointer">Stats</h1>
-          <div id="userWelcome" class="hidden flex flex-col">
-          <h1 class="font-bold text-2xl">Welcome, Charlotte</h1>
-          <p class="text-xs font-semibold">Lets take a look at your activity</p>
-          </div>
-          
-       <!-- Hamburger Button (visible on smaller screens) -->
-      <button id="hamburgerButton" class="lg:hidden  text-white absolute top-5 right-0" >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
-
-
-      <!-- Mobile Menu (hidden by default, shown when the hamburger is clicked) -->
-      <div id="mobileMenu" class="lg:hidden hidden ring-4 ring-purple-950/10 fixed top-0 right-0 h-full w-64 z-40 bg-[#252430] transform translate-x-full translate-x-0 transition-transform duration-300">
-        <div class="flex justify-end px-6 py-2 cursor-pointer text-white">
-          <button id="exitButton"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="flex font-semibold text-gray-800 min-h-full">
-          <div class="flex flex-col w-full justify-between">
-            <div>
-              <div class="flex items-center gap-2 w-full px-2 text-white">
-                <i class="fa-solid fa-house"></i>
-                <a href="#" class="block py-2">Home</a>
-              </div>
-              <div class="flex items-center gap-2 w-full  px-2 text-white">
-                <i class="fa-solid fa-person-running"></i>
-                <a href="#" class="block  py-2">Workouts</a>
-              </div>
-              <div class="flex items-center gap-2 w-full px-2 text-white">
-                <i class="fa-solid fa-chart-simple"></i>
-                <a href="#" class="block py-2">Stats</a>
-              </div>
-            </div>
-              <div class="flex items-center gap-2 w-full px-2 text-white mb-12">
-                <i class="fa-solid fa-gear"></i>
-                <a href="#" class="block  py-2">Settings</a>
-              </div>
-          </div>
-        </div>
       </div>
-    </nav>
+     </nav>
 
 
       <!--Start of grid-->

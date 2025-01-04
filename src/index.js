@@ -195,37 +195,32 @@ const initializeAuthButtons = async () => {
 
 
 
-    //Show mobile menu
-    const showMenu = () => {
-      mobileMenu.classList.remove('hidden', 'translate-x-full');
-      mobileMenu.classList.add('translate-x-0');
-      document.addEventListener("click", closeMenuOnOutsideClick);
-    };
-
-    //Hide mobile menu
-    const hideMenu = () => {
-      mobileMenu.classList.remove('translate-x-0');
-      mobileMenu.classList.add('hidden', 'translate-x-full');
-      document.removeEventListener("click", closeMenuOnOutsideClick);
-    }
-
-    //Open Menu
-    hamburgerButton.addEventListener('click', showMenu);
-
-    //Close Menu
-    exitButton.addEventListener('click', hideMenu);
-
-    //Close Menu if outside click
-    function closeMenuOnOutsideClick(event) {
-      if (!mobileMenu.contains(event.target) && !hamburgerButton.contains(event.target)) {
-        hideMenu();
-      }
-    }
-
     //ClickHome
     document.getElementById('clickHome').addEventListener('click', () => {
       history.pushState({page: 'dashboard '}, '', '/');
       showSection('dashboard');
     })
 
+
+    function showMenu() {
+      mobileMenu.classList.remove('hidden', 'translate-x-full');
+      mobileMenu.classList.add('translate-x-0');
+      document.addEventListener('click', closeMenuOnOutsideClick);
+    }
+  
+    function hideMenu() {
+      mobileMenu.classList.remove('translate-x-0');
+      mobileMenu.classList.add('hidden', 'translate-x-full');
+      document.removeEventListener('click', closeMenuOnOutsideClick);
+    }
+  
+    function closeMenuOnOutsideClick(event) {
+      if (!mobileMenu.contains(event.target) && !hamburgerButton.contains(event.target)) {
+        hideMenu();
+      }
+    }
+  
+    hamburgerButton.addEventListener('click', showMenu);
+    exitButton.addEventListener('click', hideMenu);
   });
+
