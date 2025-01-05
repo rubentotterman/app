@@ -55,6 +55,98 @@ function initializeCharts() {
   }
 }
 
+// Add this function to handle saving sleep data
+async function saveSleepData(hoursSlept, startTime, endTime) {
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    
+    if (!session) {
+      alert('Please log in to save sleep data');
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from('sleep_records')
+      .insert([
+        {
+          user_id: session.user.id,
+          hours_slept: hoursSlept,
+          sleep_start: startTime,
+          sleep_end: endTime,
+          created_at: new Date().toISOString()
+        }
+      ]);
+
+    if (error) throw error;
+    
+    // Update chart after successful save
+    if (sleepChart) {
+      sleepChart.data.datasets[0].data[0] = hoursSlept;
+      sleepChart.update();
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error saving sleep data:', error);
+    alert('Failed to save sleep data');
+  }
+}
+
+// Modify your form submit handler
+document.getElementById('sleepTrackerForm')?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  
+  const formData = new FormData(event.target);
+  const startDate = formData.get('sleep-start-date');
+  const startTime = formData.get('sleep-start-time');
+  const endDate = formData.get('sleep-end-date');
+  const endTime = formData.get('sleep-end-time');
+  
+  const start = new Date(`${startDate}T${startTime}`);
+  const end = new Date(`${endDate}T${endTime}`);
+  
+  const hoursSlept = (end - start) / (1000 * 60 * 60);
+  
+  // Save data to Supabase and update chart
+  await saveSleepData(hoursSlept, start, end);
+});
+
+// Add function to load user's sleep data
+async function loadUserSleepData() {
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    
+    if (!session) return;
+
+    const { data, error } = await supabase
+      .from('sleep_records')
+      .select('*')
+      .eq('user_id', session.user.id)
+      .order('created_at', { ascending: false })
+      .limit(1);
+
+    if (error) throw error;
+
+    if (data && data.length > 0) {
+      const latestRecord = data[0];
+      
+      if (sleepChart) {
+        sleepChart.data.datasets[0].data[0] = latestRecord.hours_slept;
+        sleepChart.update();
+      }
+    }
+  } catch (error) {
+    console.error('Error loading sleep data:', error);
+  }
+}
+
+// Call loadUserSleepData when user logs in
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_IN') {
+    loadUserSleepData();
+  }
+});
+
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("DOMContentLoaded event fired.");
  
@@ -253,6 +345,7 @@ const initializeAuthButtons = async () => {
 
   // call initialization function on page load
   initializeAuthButtons();
+
 
 
 
