@@ -2,9 +2,15 @@ import { Chart, registerables } from "chart.js";
 Chart.register(...registerables);
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient('https://ynaebzwplirfhvoxrvnz.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InluYWViendwbGlyZmh2b3hydm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQzMDg4NTAsImV4cCI6MjA0OTg4NDg1MH0.Ac6HePbKTdeCVDWAe8KIZOO4iXzIuLODWKRzyhqmfpA');
 
 let workoutChart, sleepChart;
+let sleepData = {
+  actual: 4,
+  goal: 8
+};
+
+
+const supabase = createClient('https://ynaebzwplirfhvoxrvnz.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InluYWViendwbGlyZmh2b3hydm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQzMDg4NTAsImV4cCI6MjA0OTg4NDg1MH0.Ac6HePbKTdeCVDWAe8KIZOO4iXzIuLODWKRzyhqmfpA');
 
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === 'visible') {
@@ -15,6 +21,39 @@ document.addEventListener("visibilitychange", () => {
     }
   }
 });
+
+
+function initializeCharts() {
+  // Destroy existing charts if they exist
+  if (workoutChart) workoutChart.destroy();
+  if (sleepChart) sleepChart.destroy();
+
+  if (elements.workoutBarChartCanvas) {
+    const ctx = elements.workoutBarChartCanvas.getContext("2d");
+    workoutChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Calories Intake", "Calories Burned", "Activity Time"],
+        datasets: [
+          { label: "Workout Metrics", data: [800, 850, 400], backgroundColor: ["#F29559", "#9E2835", "#78e3fd"] },
+        ],
+      },
+      options: { responsive: true, plugins: { legend: { display: false } } },
+    });
+  }
+
+  if (elements.sleepChartCanvas) {
+    const sleepCtx = elements.sleepChartCanvas.getContext("2d");
+    sleepChart = new Chart(sleepCtx, {
+      type: "bar",
+      data: {
+        labels: ["Actual", "Goal"],
+        datasets: [{ label: "Sleep Time", data: [6, 8], backgroundColor: ["#78e3fd", "rgba(255,206,86,0.2)"] }],
+      },
+      options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } },
+    });
+  }
+}
 
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("DOMContentLoaded event fired.");
@@ -34,37 +73,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     clickHome: document.getElementById("clickHome"),
   };
 
-  function initializeCharts() {
-    // Destroy existing charts if they exist
-    if (workoutChart) workoutChart.destroy();
-    if (sleepChart) sleepChart.destroy();
   
-    if (elements.workoutBarChartCanvas) {
-      const ctx = elements.workoutBarChartCanvas.getContext("2d");
-      workoutChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: ["Calories Intake", "Calories Burned", "Activity Time"],
-          datasets: [
-            { label: "Workout Metrics", data: [800, 850, 400], backgroundColor: ["#F29559", "#9E2835", "#78e3fd"] },
-          ],
-        },
-        options: { responsive: true, plugins: { legend: { display: false } } },
-      });
-    }
-  
-    if (elements.sleepChartCanvas) {
-      const sleepCtx = elements.sleepChartCanvas.getContext("2d");
-      sleepChart = new Chart(sleepCtx, {
-        type: "bar",
-        data: {
-          labels: ["Actual", "Goal"],
-          datasets: [{ label: "Sleep Time", data: [6, 8], backgroundColor: ["#78e3fd", "rgba(255,206,86,0.2)"] }],
-        },
-        options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } },
-      });
-    }
-  }
+
+ 
 
   const sections = {
     dashboard: document.getElementById('dashboard-section'),
@@ -109,8 +120,58 @@ const urlParams = new URLSearchParams(window.location.search);
 const currentPage = urlParams.get('page') || 'dashboard';
 history.replaceState({ page: currentPage }, '', `/?page=${currentPage}`);
 showSection(currentPage);
-  
+ 
 
+
+function handleSleepDataSubmit(event) {
+  event.preventDefault();
+
+
+// Get the input values
+const startDate = new Date(document.querySelector('[name="sleep-start-date"]').value);
+const startTime = document.querySelector('[name="sleep-start-time"]').value;
+const endDate = new Date(document.querySelector('[name="sleep-end-date"]').value);
+const endTime = document.querySelector('[name="sleep-end-time"]').value;
+
+// Combine date and time
+const start = new Date(`${startDate.toDateString()} ${startTime}`);
+const end = new Date(`${endDate.toDateString()} ${endTime}`);
+
+// Calculate hours slept
+const hoursSlept = (end - start) / (1000 * 60 * 60);
+
+// Update sleep data
+sleepData.actual = hoursSlept;
+
+// Update both charts
+updateSleepCharts();
+
+}
+
+
+//  initializeCharts function to use sleepData
+function initializeCharts() {
+  // ... your existing workoutChart code ...
+
+  if (elements.sleepChartCanvas) {
+    const sleepCtx = elements.sleepChartCanvas.getContext("2d");
+    sleepChart = new Chart(sleepCtx, {
+      type: "bar",
+      data: {
+        labels: ["Actual", "Goal"],
+        datasets: [{ 
+          label: "Sleep Time", 
+          data: [sleepData.actual, sleepData.goal], 
+          backgroundColor: ["#78e3fd", "rgba(255,206,86,0.2)"] 
+        }],
+      },
+      options: { 
+        scales: { y: { beginAtZero: true } }, 
+        plugins: { legend: { display: false } } 
+      },
+    });
+  }
+}
 
 // Function to sign in with Discord
 async function signInWithDiscord() {

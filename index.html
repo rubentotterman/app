@@ -253,18 +253,29 @@
             </a>
           </div>
       </nav>    
-      <!--Sleep tracker card-->
-      <div class="p-4 bg-[#252430] text-white rounded shadow flex flex-col gap-2">
-        <h2 class="text-xl font-semibold">Details</h2>
-  
-       <div class="w-full flex flex-col gap-2">
-        <h3 class="mb-1">Start of sleep:</h3>
-        <div class="flex flex-col sm:flex-row w-full gap-2">
-          <div class="w-full sm:w-1/2">
-            <input type="date" class="w-full bg-[#1E1F25] text-white px-1 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-800 hover:border-gray-700 transition-all">
-          </div>
+     <!--Sleep tracker card-->
+<div class="p-4 bg-[#252430] text-white rounded shadow flex flex-col gap-2">
+  <h2 class="text-xl font-semibold">Details</h2>
+
+  <form id="sleepTrackerForm" class="flex flex-col gap-4">
+    <div class="w-full flex flex-col gap-2">
+      <h3 class="mb-1">Start of sleep:</h3>
+      <div class="flex flex-col sm:flex-row w-full gap-2">
         <div class="w-full sm:w-1/2">
-          <input type="time" class="w-full bg-[#1E1F25] text-white px-1 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-800 hover:border-gray-700 transition-all">
+          <input 
+            name="sleep-start-date" 
+            type="date" 
+            required
+            class="w-full bg-[#1E1F25] text-white px-1 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-800 hover:border-gray-700 transition-all"
+          >
+        </div>
+        <div class="w-full sm:w-1/2">
+          <input 
+            name="sleep-start-time" 
+            type="time" 
+            required
+            class="w-full bg-[#1E1F25] text-white px-1 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-800 hover:border-gray-700 transition-all"
+          >
         </div>
       </div>
     </div>
@@ -273,18 +284,33 @@
       <h3 class="mb-1">End of sleep:</h3>
       <div class="flex flex-col sm:flex-row w-full gap-2">
         <div class="w-full sm:w-1/2">
-          <input type="date" class="w-full bg-[#1E1F25] text-white px-1 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-800 hover:border-gray-700 transition-all">
+          <input 
+            name="sleep-end-date" 
+            type="date" 
+            required
+            class="w-full bg-[#1E1F25] text-white px-1 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-800 hover:border-gray-700 transition-all"
+          >
         </div>
         <div class="w-full sm:w-1/2">
-          <input type="time" class="w-full bg-[#1E1F25] text-white px-1 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-800 hover:border-gray-700 transition-all">
+          <input 
+            name="sleep-end-time" 
+            type="time" 
+            required
+            class="w-full bg-[#1E1F25] text-white px-1 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-800 hover:border-gray-700 transition-all"
+          >
         </div>
       </div>
-     <!-- Submit Button -->
-     <button class="w-full mt-5 bg-gradient-to-r from-primary-color to-purple-500 text-white font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity">
+    </div>
+
+    <!-- Submit Button -->
+    <button 
+      type="submit" 
+      class="w-full mt-5 bg-gradient-to-r from-primary-color to-purple-500 text-white font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity"
+    >
       Save Sleep Data
     </button>
-    </div>
-  </div>
+  </form>
+</div>
           
       <!--Weightloss card-->
       <div class="p-4 bg-[#252430] text-white rounded shadow">
