@@ -59,52 +59,38 @@ function initializeCharts() {
 async function saveSleepData(hoursSlept, startTime, endTime) {
   try {
     const { data: { session } } = await supabase.auth.getSession();
-    console.log("Current session:", session); // See what user data we have
     
     if (!session) {
       alert('Please log in to save sleep data');
       return;
     }
 
-    const { data: userData, error: userError } = await supabase
-    .from('logify_user_table')
-    .select('*');
-    
-    console.log("User data from logify_user_table:", userData); // See what's in our user table
-
-    if (userError || !userData ) {
-      //User doesnt exist in logify_user_table, create them
-      const { data: newUser, error: createError } = await supabase
-      .from('logify_user_table')
-      .insert([{ id: session.user.id }])
-      .select()
-      .single();
-
-    if (createError) throw createError;
-    userData = newUser;
-    }
+    console.log('Current user:', session.user); // Debug log
 
     const { data, error } = await supabase
       .from('sleep_records')
       .insert([
         {
-          user_id: session.user.id,
+          user_id: session.user.id, // This should be a UUID
           hours_slept: hoursSlept,
           sleep_start: startTime,
-          sleep_end: endTime,
-          created_at: new Date().toISOString()
+          sleep_end: endTime
         }
       ]);
 
-    if (error) throw error;
+    if (error) {
+      console.error('Insert error:', error);
+      throw error;
+    }
+
+    console.log('Sleep data saved:', data);
     
-    // Update chart after successful save
+    // Update chart
     if (sleepChart) {
       sleepChart.data.datasets[0].data[0] = hoursSlept;
       sleepChart.update();
     }
 
-    return data;
   } catch (error) {
     console.error('Error saving sleep data:', error);
     alert('Failed to save sleep data');
@@ -165,6 +151,8 @@ supabase.auth.onAuthStateChange((event, session) => {
     loadUserSleepData();
   }
 });
+
+
 
 
 
