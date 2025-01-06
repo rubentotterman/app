@@ -65,27 +65,43 @@ async function saveSleepData(hoursSlept, startTime, endTime) {
       return;
     }
 
-    console.log('Current user:', session.user); // Debug log
+    console.log('Current session:', session); // Debug
 
+    // First ensure user exists - convert string ID to number
+    const numericId = parseInt(session.user.id);
+    
+    const { data: userData, error: userError } = await supabase
+      .from('logify_user_table')
+      .upsert([
+        {
+          id: numericId,
+          discord_id: session.user.id, // Keep original string ID here
+          username: session.user.user_metadata?.full_name || 'Anonymous',
+          created_at: new Date().toISOString()
+        }
+      ])
+      .select()
+      .single();
+
+    if (userError) {
+      console.error('Error creating user:', userError);
+      throw userError;
+    }
+
+    // Now save sleep data using the numeric ID
     const { data, error } = await supabase
       .from('sleep_records')
       .insert([
         {
-          user_id: session.user.id, // This should be a UUID
+          user_id: numericId, // Use numeric ID here
           hours_slept: hoursSlept,
           sleep_start: startTime,
           sleep_end: endTime
         }
       ]);
 
-    if (error) {
-      console.error('Insert error:', error);
-      throw error;
-    }
+    if (error) throw error;
 
-    console.log('Sleep data saved:', data);
-    
-    // Update chart
     if (sleepChart) {
       sleepChart.data.datasets[0].data[0] = hoursSlept;
       sleepChart.update();
@@ -151,9 +167,6 @@ supabase.auth.onAuthStateChange((event, session) => {
     loadUserSleepData();
   }
 });
-
-
-
 
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -349,8 +362,6 @@ const initializeAuthButtons = async () => {
     };
   }
 };
-
-
 
   // call initialization function on page load
   initializeAuthButtons();
