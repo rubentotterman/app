@@ -147,6 +147,8 @@ supabase.auth.onAuthStateChange((event, session) => {
   }
 });
 
+
+
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("DOMContentLoaded event fired.");
  
