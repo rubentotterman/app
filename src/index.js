@@ -65,6 +65,23 @@ async function saveSleepData(hoursSlept, startTime, endTime) {
       return;
     }
 
+    const { data: userData, error: userError } = await supabase
+    .from('logify_user_table')
+    .select('id')
+    .single();
+
+    if (userError || !userData ) {
+      //User doesnt exist in logify_user_table, create them
+      const { data: newUser, error: createError } = await supabase
+      .from('logify_user_table')
+      .insert([{ id: session.user.id }])
+      .select()
+      .single();
+
+    if (createError) throw createError;
+    userData = newUser;
+    }
+
     const { data, error } = await supabase
       .from('sleep_records')
       .insert([
