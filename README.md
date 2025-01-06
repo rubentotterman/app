@@ -43,31 +43,6 @@ Supabase for database and authentication
 PostgreSQL with Row Level Security (RLS)
 
 
-
-Getting Started
-
-Prerequisites
-
-Node.js installed
-Supabase account
-
-
-Installation
-bashCopy# Clone the repository
-git clone [repository-url]
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-Environment Setup
-Create a .env file with:
-CopyVITE_SUPABASE_URL=your-supabase-url
-VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
-
-
 Database Structure
 Tables
 
