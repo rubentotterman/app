@@ -59,6 +59,7 @@ function initializeCharts() {
 async function saveSleepData(hoursSlept, startTime, endTime) {
   try {
     const { data: { session } } = await supabase.auth.getSession();
+    console.log("Current session:", session); // See what user data we have
     
     if (!session) {
       alert('Please log in to save sleep data');
@@ -67,8 +68,9 @@ async function saveSleepData(hoursSlept, startTime, endTime) {
 
     const { data: userData, error: userError } = await supabase
     .from('logify_user_table')
-    .select('id')
-    .single();
+    .select('*');
+    
+    console.log("User data from logify_user_table:", userData); // See what's in our user table
 
     if (userError || !userData ) {
       //User doesnt exist in logify_user_table, create them
