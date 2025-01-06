@@ -9,7 +9,7 @@
 </head>
 <body class="bg-[#191824] flex flex-col min-h-screen">
     <!--Content wrapper-->
-  <div id="app" class="container relative flex flex-1 flex-col">
+  <div id="app" class="container relative flex flex-1 flex-col pb-10">
   <div id="content"> 
 
     <!--Navbar content-->
@@ -95,10 +95,10 @@
     <div id="dashboard-section">
 
     <!--Start of grid-->
-    <div class="flex flex-col justify-center lg:grid lg:grid-cols-6 gap-4 mt-24 flex-1">
+    <div class="flex flex-col justify-center lg:grid lg:grid-cols-4 grid-rows-2 gap-4 mt-8 flex-1">
 
       <!--Chart Card-->
-      <div class="bg-[#252430] ring-2 ring-white/10 text-white rounded-lg font-bold lg:col-span-3 lg:col-start-2  justify-center items-center py-2 px-4 shadow-md">
+      <div class="bg-[#252430] ring-2 ring-white/10 text-white rounded-lg font-bold lg:col-span-2 lg:col-start-1  justify-center items-center py-2 px-4 shadow-md">
           <div class="card bg-beige p-6 rounded-lg gap-6">
               <!-- Text Content -->
               <div class="text-content whitespace-nowrap h-full">
@@ -135,7 +135,7 @@
       </div>
 
       <!--Sleep Time -->
-      <div class="bg-[#252430] ring-2 ring-white/10 col-start-2 col-span-2 py-4 px-4 rounded-lg shadow-md text-white">
+      <div class="bg-[#252430] ring-2 ring-white/10 col-start-1 col-span-2 py-4 px-4 rounded-lg shadow-md text-white">
         <div class="flex flex-col justify-between h-full">
           <div class="flex justify-between">
             <p class="font-bold">Sleep Time</p>
@@ -147,9 +147,29 @@
           </div>
         </div>
       </div>
+      <!--Weightloss card-->
+      <div class="bg-[#252430] ring-2 ring-white/10 col-start-3 col-span-2 row-span-1 py-2 px-4 rounded-lg text-white shadow-md">
+        <div class="flex flex-col h-full justify-center items-center ">
+          <p>Weight Loss Goal</p>
+          <div class="p-4 rounded-lg w-full max-w-lg">
+            <!-- Progress Bar Container -->
+            <div class="relative h-4 bg-gray-600 rounded-full overflow-hidden">
+              <!-- Progress -->
+              <div class="absolute h-full bg-[#F29559] rounded-full" style="width: 65%;"></div>
+            </div>
+            <!-- Labels -->
+            <div class="flex justify-between mt-2 text-sm ">
+              <span>50kg</span>
+              <span>70kg</span>
+            </div>
+          </div>
+          
+          <p><span class="font-bold"> 80% </span> completed</p>
+        </div>  
+      </div>
       
       <!--My Activities Card-->
-      <div class="bg-[#252430] ring-2 ring-white/10 relative flex flex-col text-white col-span-3 row-span-2 py-4 px-4 rounded-lg shadow-md font-bold">
+      <div class="bg-[#252430] ring-2 ring-white/10 relative flex flex-col text-white col-start-1 col-span-4 row-span-1 py-4 px-4 rounded-lg shadow-md font-bold">
         <div class="flex justify-between mb-4">
           <h1 class="font-bold">My Activities</h1>
           <div class="flex justify-center items-center cursor-pointer">
@@ -199,26 +219,7 @@
           </div>
       </div>
       </div>
-      <!--Weightloss card-->
-      <div class="bg-[#252430] ring-2 ring-white/10 col-start-2 col-span-2 row-span-1 py-2 px-4 rounded-lg text-white shadow-md">
-        <div class="flex flex-col h-full justify-center items-center ">
-          <p>Weight Loss Goal</p>
-          <div class="p-4 rounded-lg w-full max-w-lg">
-            <!-- Progress Bar Container -->
-            <div class="relative h-4 bg-gray-600 rounded-full overflow-hidden">
-              <!-- Progress -->
-              <div class="absolute h-full bg-[#F29559] rounded-full" style="width: 65%;"></div>
-            </div>
-            <!-- Labels -->
-            <div class="flex justify-between mt-2 text-sm ">
-              <span>50kg</span>
-              <span>70kg</span>
-            </div>
-          </div>
-          
-          <p><span class="font-bold"> 80% </span> completed</p>
-        </div>  
-      </div>
+      
     </div><!--End of grid-->
     </div><!--End of dashboard section-->
 
