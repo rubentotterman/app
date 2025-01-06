@@ -292,7 +292,7 @@ async function signInWithDiscord() {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'discord',
     options: {
-      redirectTo: 'https://app-bo6g.vercel.app/'
+      redirectTo: 'https://application-flame.vercel.app/?page=dashboard'
     }
   });
 
