@@ -8,11 +8,44 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class="bg-[#191824] flex flex-col min-h-screen">
-    <!--Content wrapper-->
-  <div id="app" class="container relative flex flex-1 flex-col pb-10">
-  <div id="content"> 
-
-    <!--Navbar content-->
+  <div id="content">
+      <div class="flex"> 
+      <!-- Sidebar -->
+      <nav class="bg-[#252430] ring-2 ring-white/10 lg:flex sm:hidden hidden w-24 sticky top-0 h-screen text-white rounded-r-lg flex-col items-center justify-between pt-6 pb-6">
+        <!-- Logo -->
+        <div class="w-10 h-10 mb-12 bg-[#9f7aea] hover:scale-110 rounded-full flex items-center justify-center cursor-pointer">
+          <span class="text-xl font-bold">C</span>
+        </div>
+        
+        <!-- Sidebar Navigation Links -->
+        <div class="space-y-6 w-full">
+          <a href="/dashboard" id="dashboard" class="flex flex-col items-center text-gray-300 hover:text-purple-400">
+            <i class="fa-solid fa-chart-line text-lg"></i>
+            <span class="text-xs">dashboard</span>
+          </a>
+            <a href="/stats" id="stats" class="flex flex-col items-center text-gray-300 hover:text-purple-400">
+              <i class="fa-solid fa-chart-line text-lg"></i>
+              <span class="text-xs ">Stats</span>
+            </a>
+            <a href="/workouts" id="workouts" class="flex flex-col items-center text-gray-300 hover:text-purple-400">
+              <i class="fa-solid fa-dumbbell text-lg"></i>
+              <span class="text-xs ">Workouts</span>
+            </a>
+          <a href="/settings" id="settings" class="flex flex-col items-center pb-2  min-w-full text-gray-300 hover:text-purple-400">
+            <i class="fa-solid fa-cog text-lg"></i>
+            <span class="text-xs ">Settings</span>
+          </a>
+          <a href="/logout" id="logout" class="flex flex-col items-center pb-2  min-w-full text-gray-300 hover:text-purple-400">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span class="text-xs ">Logout</span>
+          </a>
+        </div>
+      </nav>
+     <!--Main layout wrapper-->     
+    <div id="app" class="container relative flex h-screen flex-col">  
+     <!--Main content area--> 
+    <div class="flex-1 overflow-x-hidden pb-10 px-10">
+       <!--Top Navbar-->
     <nav class="navbar justify-between text text-white pt-5 relative flex">
       <div class="flex flex-col justify-center">
         <h1 id="clickHome" class="font-bold text-xl cursor-pointer">Logify</h1>
@@ -57,45 +90,12 @@
           </div>
         </div>
       </div>
-    </nav>
-
-    <!-- Sidebar -->
-    <nav class="bg-[#252430] ring-2 ring-white/10 lg:flex fixed left-0 top-0 h-full w-24 sm:hidden hidden text-white w-20 rounded-lg flex flex-col items-center justify-between pt-6 pb-6 ">
-      <!-- Logo -->
-      <div class="w-10 h-10 mb-12 bg-[#9f7aea] hover:scale-110 rounded-full flex items-center justify-center cursor-pointer">
-        <span class="text-xl font-bold">C</span>
-      </div>
-      
-      <!-- Sidebar Navigation Links -->
-      <div class="space-y-6 w-full">
-        <a href="/dashboard" id="dashboard" class="flex flex-col items-center text-gray-300 hover:text-purple-400">
-          <i class="fa-solid fa-chart-line text-lg"></i>
-          <span class="text-xs">dashboard</span>
-        </a>
-          <a href="/stats" id="stats" class="flex flex-col items-center text-gray-300 hover:text-purple-400">
-            <i class="fa-solid fa-chart-line text-lg"></i>
-            <span class="text-xs ">Stats</span>
-          </a>
-          <a href="/workouts" id="workouts" class="flex flex-col items-center text-gray-300 hover:text-purple-400">
-            <i class="fa-solid fa-dumbbell text-lg"></i>
-            <span class="text-xs ">Workouts</span>
-          </a>
-        <a href="/settings" id="settings" class="flex flex-col items-center pb-2  min-w-full text-gray-300 hover:text-purple-400">
-          <i class="fa-solid fa-cog text-lg"></i>
-          <span class="text-xs ">Settings</span>
-        </a>
-        <a href="/logout" id="logout" class="flex flex-col items-center pb-2  min-w-full text-gray-300 hover:text-purple-400">
-          <i class="fa-solid fa-arrow-right-from-bracket"></i>
-          <span class="text-xs ">Logout</span>
-        </a>
-      </div>
-        </nav> 
-
+    </nav> 
     <!-- Dashboard section-->
     <div id="dashboard-section">
 
     <!--Start of grid-->
-    <div class="flex flex-col justify-center lg:grid lg:grid-cols-4 grid-rows-2 gap-4 mt-8 flex-1">
+    <div id="" class="flex flex-col justify-center lg:grid lg:grid-cols-4 grid-rows-2 gap-4 mt-8 flex-1">
 
       <!--Chart Card-->
       <div class="bg-[#252430] ring-2 ring-white/10 text-white rounded-lg font-bold lg:col-span-2 lg:col-start-1  justify-center items-center py-2 px-4 shadow-md">
@@ -319,8 +319,12 @@
       </div>
     </div><!--End of stats dashboard-->
   </div><!--End of grid-->
+  </div> <!--Main content wrapper end-->
+  </div>
   </div><!--End of Content-->
   </div> <!--End of Wrapper-->
+  
+  
   
  
   <!--Js file linked-->
