@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 document.querySelectorAll('a').forEach((link) => {
   link.addEventListener('click', (e) => {
     e.preventDefault(); // Prevent page reload
-    const page = e.target.id; // Get the page id
+    const page = link.id; // Get the page id
     if (page && sections[page]) {
       history.pushState({ page }, '', `/?page=${page}`);
       showSection(page);
