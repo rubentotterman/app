@@ -187,6 +187,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     clickHome: document.getElementById("clickHome"),
     sidebarToggle: document.getElementById("sidebarToggle"),
     sidebar: document.getElementById("sidebar"),
+    sidebarLogout: document.getElementById("sidebarLogout"),
   };
 
 
@@ -322,6 +323,11 @@ supabase.auth.onAuthStateChange((event, session) => {
       await supabase.auth.signOut();
     };
 
+    //Sidebar Logout functionality
+    sidebarLogout.onclick = async () => {
+      await supabase.auth.signOut();
+    };
+
     console.log('Stored user in localStorage: ', session.user);
   } else if (event === 'SIGNED_OUT') {
     console.log('User signed out');
@@ -359,6 +365,8 @@ if (elements.sidebarToggle && elements.sidebar) {
     });
   });
 }
+
+
 
 
 
