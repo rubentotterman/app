@@ -185,11 +185,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     sleepChartCanvas: document.getElementById("sleepChartCanvas"),
     loginButton: document.getElementById("loginButton"),
     clickHome: document.getElementById("clickHome"),
+    sidebarToggle: document.getElementById("sidebarToggle"),
+    sidebar: document.getElementById("sidebar"),
   };
 
-  
-
- 
 
   const sections = {
     dashboard: document.getElementById('dashboard-section'),
@@ -337,6 +336,31 @@ supabase.auth.onAuthStateChange((event, session) => {
     };
    }
 });
+
+// Sidebar toggle functionality
+if (elements.sidebarToggle && elements.sidebar) {
+  let isExpanded = true;
+  const navTexts = document.querySelectorAll('.nav-text');
+
+  elements.sidebarToggle.addEventListener('click', () => {
+    console.log('Toggle clicked'); // Debug log
+    isExpanded = !isExpanded;
+    
+    elements.sidebar.style.width = isExpanded ? '160px' : '80px';
+    
+    navTexts.forEach(text => {
+      if (isExpanded) {
+        text.classList.remove('opacity-0');
+        text.classList.remove('hidden');
+      } else {
+        text.classList.add('opacity-0');
+        setTimeout(() => text.classList.add('hidden'), 200);
+      }
+    });
+  });
+}
+
+
 
 
 const initializeAuthButtons = async () => {
