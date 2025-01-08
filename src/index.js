@@ -211,16 +211,22 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   
   // Event listeners for navigation
-document.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault(); // Prevent page reload
-    const page = link.id; // Get the page id
-    if (page && sections[page]) {
-      history.pushState({ page }, '', `/?page=${page}`);
-      showSection(page);
-    }
+  document.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      // Get the closest 'a' tag parent when clicking any element inside the link
+      const linkElement = e.target.closest('a');
+      const page = linkElement.id;
+      
+      console.log('Link ID:', page); // Debug log
+      
+      if (page && sections[page]) {
+        history.pushState({ page }, '', `/?page=${page}`);
+        showSection(page);
+      }
+    });
   });
-});
   
 // Handle browser back/forward navigation
 window.onpopstate = (event) => {
