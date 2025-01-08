@@ -197,14 +197,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
   
   function showSection(section) {
+    console.log('Showing section', section); //debug log
     // Save current section to localStorage
     Object.keys(sections).forEach((key) => {
       if (key === section) {
+        console.log('Showing', key); //debug log
         sections[key].classList.remove('hidden'); // Show the active section
         if (key === 'dashboard') {
           initializeCharts();
         }
       } else {
+        console.log('hiding', key); //debug log
         sections[key].classList.add('hidden'); // Hide other sections
       }
     });
