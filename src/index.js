@@ -12,19 +12,11 @@ let sleepData = {
 
 const supabase = createClient('https://ynaebzwplirfhvoxrvnz.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InluYWViendwbGlyZmh2b3hydm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQzMDg4NTAsImV4cCI6MjA0OTg4NDg1MH0.Ac6HePbKTdeCVDWAe8KIZOO4iXzIuLODWKRzyhqmfpA');
 
-document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === 'visible') {
-    // Get current path and reinitialize that section
-    const path = window.location.pathname.slice(1) || 'dashboard';
-    if (sections[path]) {
-      showSection(path);
-    }
-  }
-});
 
 
 function initializeCharts() {
   // Destroy existing charts if they exist
+  console.log('Initialized charts');
   if (workoutChart) workoutChart.destroy();
   if (sleepChart) sleepChart.destroy();
 
@@ -190,39 +182,51 @@ document.addEventListener("DOMContentLoaded", async () => {
     sidebarLogout: document.getElementById("sidebarLogout"),
   };
 
+  console.log("canvas elements:", {
+    workout: document.getElementById("workoutBarChartCanvas"),
+    sleep: document.getElementById("sleepChartCanvas")
+  });
 
   const sections = {
     dashboard: document.getElementById('dashboard-section'),
     stats: document.getElementById('stats-section'),
   };
-  
-  function showSection(section) {
-    console.log('Showing section:', section);
-  
-    // Make sure both sections exist before proceeding
-    if (!sections.dashboard || !sections.stats) {
-      console.error('Sections not found:', sections);
-      return;
-    }
-  
-    // Hide all sections first
-    sections.dashboard.classList.add('hidden');
-    sections.stats.classList.add('hidden');
-  
-    // Show requested section
-    if (sections[section]) {
-      sections[section].classList.remove('hidden');
-      
-      // Initialize charts only if showing dashboard
-      if (section === 'dashboard') {
-        initializeCharts();
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === 'visible') {
+      // Get current path and reinitialize that section
+      const path = window.location.pathname.slice(1) || 'dashboard';
+      if (sections[path]) {
+        showSection(path);
       }
     }
-  }
+  });
   
-  // Event listeners for navigation
+  console.log('sidebar links found:', document.querySelectorAll('a'));
+  
+  function showSection(section) {
+    console.log('Showing section called with:', section);
+    
+    Object.keys(sections).forEach((key) => {
+        if (key === section) {
+            console.log('Showing', key);
+            sections[key].classList.remove('hidden');
+            // Check for dashboard-section here
+            if (section === 'dashboard-section') { // Changed this line
+                console.log('Dashboard section Shown, initializing charts');
+                initializeCharts();
+            }
+        } else {
+            console.log('Hiding', key);
+            sections[key].classList.add('hidden');
+        }
+    });
+}
+  
+  // Event listeners for navigation // CLICK HANDLER
   document.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', (e) => {
+      console.log('Link clicked');
       e.preventDefault();
       
       // Get the closest 'a' tag parent when clicking any element inside the link
@@ -279,31 +283,87 @@ updateSleepCharts();
 }
 
 
-//  initializeCharts function to use sleepData
 function initializeCharts() {
-  // ... your existing workoutChart code ...
+  console.log('Starting initializeCharts'); // Debug start
+
+  // Log existing charts
+  console.log('Existing charts:', { workoutChart, sleepChart });
+
+  if (workoutChart) {
+    console.log('Destroying old workout chart');
+    workoutChart.destroy();
+  }
+  if (sleepChart) {
+    console.log('Destroying old sleep chart');
+    sleepChart.destroy();
+  }
+
+  // Log canvas elements
+  console.log('Canvas elements:', {
+    workout: elements.workoutBarChartCanvas,
+    sleep: elements.sleepChartCanvas
+  });
+
+  if (elements.workoutBarChartCanvas) {
+    console.log('Creating workout chart'); // Debug before creation
+    const ctx = elements.workoutBarChartCanvas.getContext("2d");
+    try {
+      workoutChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["Calories Intake", "Calories Burned", "Activity Time"],
+          datasets: [
+            { label: "Workout Metrics", data: [800, 850, 400], backgroundColor: ["#F29559", "#9E2835", "#78e3fd"] },
+          ],
+        },
+        options: { responsive: true, plugins: { legend: { display: false } } },
+      });
+      console.log('Workout chart created successfully');
+    } catch (error) {
+      console.error('Error creating workout chart:', error);
+    }
+  }
 
   if (elements.sleepChartCanvas) {
+    console.log('Creating sleep chart'); // Debug before creation
     const sleepCtx = elements.sleepChartCanvas.getContext("2d");
-    sleepChart = new Chart(sleepCtx, {
-      type: "bar",
-      data: {
-        labels: ["Actual", "Goal"],
-        datasets: [{ 
-          label: "Sleep Time", 
-          data: [sleepData.actual, sleepData.goal], 
-          backgroundColor: ["#78e3fd", "rgba(255,206,86,0.2)"] 
-        }],
-      },
-      options: { 
-        scales: { y: { beginAtZero: true } }, 
-        plugins: { legend: { display: false } } 
-      },
-    });
+    try {
+      sleepChart = new Chart(sleepCtx, {
+        type: "bar",
+        data: {
+          labels: ["Actual", "Goal"],
+          datasets: [{ label: "Sleep Time", data: [6, 8], backgroundColor: ["#78e3fd", "rgba(255,206,86,0.2)"] }],
+        },
+        options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } },
+      });
+      console.log('Sleep chart created successfully');
+    } catch (error) {
+      console.error('Error creating sleep chart:', error);
+    }
   }
+
+  console.log('Finished initializeCharts'); // Debug end
 }
 
-// Function to sign in with Discord
+function showSection(section) {
+  console.log('Showing section:', section);
+  
+  Object.keys(sections).forEach((key) => {
+    if (key === section) {
+      console.log('Showing', key);
+      sections[key].classList.remove('hidden');
+      if (section === 'dashboard-section') {
+        console.log('Should initialize charts now'); // Debug log
+        initializeCharts();
+      }
+    } else {
+      console.log('Hiding', key);
+      sections[key].classList.add('hidden');
+    }
+  });
+}
+
+// Function to sign in with Discord 
 async function signInWithDiscord() {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'discord',

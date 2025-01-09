@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Logify</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script type="module" crossorigin src="/assets/index-RrGAniVh.js"></script>
+  <script type="module" crossorigin src="/assets/index-BfhJC-9x.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-BSgVR16v.css">
 </head>
 <body class="bg-[#191824] flex flex-col min-h-screen">
@@ -28,11 +28,11 @@
             
             <!-- Navigation Links -->
             <div class="space-y-6 w-full">
-              <a href="/dashboard" class="flex items-center px-4 gap-3 text-gray-300 hover:text-purple-400">
+              <a id="dashboard" href="/dashboard" class="flex items-center px-4 gap-3 text-gray-300 hover:text-purple-400">
                 <i class="fa-solid fa-house"></i>
                 <span class="nav-text text-xs transition-opacity">dashboard</span>
               </a>
-              <a href="/stats" class="flex items-center px-4 gap-3 text-gray-300 hover:text-purple-400">
+              <a id="stats"  href="/stats" class="flex items-center px-4 gap-3 text-gray-300 hover:text-purple-400">
                 <i class="fa-solid fa-chart-line text-lg"></i>
                 <span class="nav-text text-xs transition-opacity">Stats</span>
               </a>
@@ -227,10 +227,9 @@
           </div>
       </div>
       </div>
-      
-    </div><!--End of grid-->
-    </div><!--End of dashboard section-->
-
+    </div>
+  
+  
     <!--Stats dashboard-->
     <div id="stats-section" class="hidden">
     <!--Navbar content-->
@@ -243,11 +242,11 @@
       <!--Navbar bottom-->
       <nav class="lg:hidden fixed bottom-0 left-0 right-0 bg-[#252430] px-6 py-3">
           <div class="flex justify-between items-center max-w-md mx-auto">
-            <a id="dashboard" href="/dashboard" class="flex flex-col items-center text-gray-300">
+            <a id="dashboard-section" href="/dashboard" class="flex flex-col items-center text-gray-300">
               <i class="fa-solid fa-house text-xl"></i>
               <span class="text-xs mt-1">Home</span>
             </a>
-            <a id="stats" href="/stats" class="flex flex-col items-center text-gray-300">
+            <a id="stats-section" href="/stats" class="flex flex-col items-center text-gray-300">
               <i class="fa-solid fa-chart-line text-xl"></i>
               <span class="text-xs mt-1">Stats</span>
             </a>
