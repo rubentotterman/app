@@ -197,20 +197,27 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
   
   function showSection(section) {
-    console.log('Showing section', section); //debug log
-    // Save current section to localStorage
-    Object.keys(sections).forEach((key) => {
-      if (key === section) {
-        console.log('Showing', key); //debug log
-        sections[key].classList.remove('hidden'); // Show the active section
-        if (key === 'dashboard') {
-          initializeCharts();
-        }
-      } else {
-        console.log('hiding', key); //debug log
-        sections[key].classList.add('hidden'); // Hide other sections
+    console.log('Showing section:', section);
+  
+    // Make sure both sections exist before proceeding
+    if (!sections.dashboard || !sections.stats) {
+      console.error('Sections not found:', sections);
+      return;
+    }
+  
+    // Hide all sections first
+    sections.dashboard.classList.add('hidden');
+    sections.stats.classList.add('hidden');
+  
+    // Show requested section
+    if (sections[section]) {
+      sections[section].classList.remove('hidden');
+      
+      // Initialize charts only if showing dashboard
+      if (section === 'dashboard') {
+        initializeCharts();
       }
-    });
+    }
   }
   
   // Event listeners for navigation
@@ -222,7 +229,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const linkElement = e.target.closest('a');
       const page = linkElement.id;
       
-      console.log('Link ID:', page); // Debug log
+      console.log('Link clicked:', page); // Debug log
       
       if (page && sections[page]) {
         history.pushState({ page }, '', `/?page=${page}`);
