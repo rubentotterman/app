@@ -14,38 +14,7 @@ const supabase = createClient('https://ynaebzwplirfhvoxrvnz.supabase.co', 'eyJhb
 
 
 
-function initializeCharts() {
-  // Destroy existing charts if they exist
-  console.log('Initialized charts');
-  if (workoutChart) workoutChart.destroy();
-  if (sleepChart) sleepChart.destroy();
 
-  if (elements.workoutBarChartCanvas) {
-    const ctx = elements.workoutBarChartCanvas.getContext("2d");
-    workoutChart = new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["Calories Intake", "Calories Burned", "Activity Time"],
-        datasets: [
-          { label: "Workout Metrics", data: [800, 850, 400], backgroundColor: ["#F29559", "#9E2835", "#78e3fd"] },
-        ],
-      },
-      options: { responsive: true, plugins: { legend: { display: false } } },
-    });
-  }
-
-  if (elements.sleepChartCanvas) {
-    const sleepCtx = elements.sleepChartCanvas.getContext("2d");
-    sleepChart = new Chart(sleepCtx, {
-      type: "bar",
-      data: {
-        labels: ["Actual", "Goal"],
-        datasets: [{ label: "Sleep Time", data: [6, 8], backgroundColor: ["#78e3fd", "rgba(255,206,86,0.2)"] }],
-      },
-      options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } },
-    });
-  }
-}
 
 // Add this function to handle saving sleep data
 async function saveSleepData(hoursSlept, startTime, endTime) {
@@ -257,93 +226,41 @@ showSection(currentPage);
  
 
 
-function handleSleepDataSubmit(event) {
-  event.preventDefault();
-
-
-// Get the input values
-const startDate = new Date(document.querySelector('[name="sleep-start-date"]').value);
-const startTime = document.querySelector('[name="sleep-start-time"]').value;
-const endDate = new Date(document.querySelector('[name="sleep-end-date"]').value);
-const endTime = document.querySelector('[name="sleep-end-time"]').value;
-
-// Combine date and time
-const start = new Date(`${startDate.toDateString()} ${startTime}`);
-const end = new Date(`${endDate.toDateString()} ${endTime}`);
-
-// Calculate hours slept
-const hoursSlept = (end - start) / (1000 * 60 * 60);
-
-// Update sleep data
-sleepData.actual = hoursSlept;
-
-// Update both charts
-updateSleepCharts();
-
-}
-
-
 function initializeCharts() {
-  console.log('Starting initializeCharts'); // Debug start
-
-  // Log existing charts
-  console.log('Existing charts:', { workoutChart, sleepChart });
-
-  if (workoutChart) {
-    console.log('Destroying old workout chart');
-    workoutChart.destroy();
-  }
-  if (sleepChart) {
-    console.log('Destroying old sleep chart');
-    sleepChart.destroy();
-  }
-
-  // Log canvas elements
-  console.log('Canvas elements:', {
-    workout: elements.workoutBarChartCanvas,
-    sleep: elements.sleepChartCanvas
-  });
+  // Destroy existing charts if they exist
+  console.log('Initialized charts');
+  if (workoutChart) workoutChart.destroy();
+  if (sleepChart) sleepChart.destroy();
 
   if (elements.workoutBarChartCanvas) {
-    console.log('Creating workout chart'); // Debug before creation
     const ctx = elements.workoutBarChartCanvas.getContext("2d");
-    try {
-      workoutChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: ["Calories Intake", "Calories Burned", "Activity Time"],
-          datasets: [
-            { label: "Workout Metrics", data: [800, 850, 400], backgroundColor: ["#F29559", "#9E2835", "#78e3fd"] },
-          ],
-        },
-        options: { responsive: true, plugins: { legend: { display: false } } },
-      });
-      console.log('Workout chart created successfully');
-    } catch (error) {
-      console.error('Error creating workout chart:', error);
-    }
+    workoutChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Calories Intake", "Calories Burned", "Activity Time"],
+        datasets: [
+          { label: "Workout Metrics", data: [800, 850, 400], backgroundColor: ["#F29559", "#9E2835", "#78e3fd"] },
+        ],
+      },
+      options: { responsive: true, plugins: { legend: { display: false } } },
+    });
   }
 
   if (elements.sleepChartCanvas) {
-    console.log('Creating sleep chart'); // Debug before creation
     const sleepCtx = elements.sleepChartCanvas.getContext("2d");
-    try {
-      sleepChart = new Chart(sleepCtx, {
-        type: "bar",
-        data: {
-          labels: ["Actual", "Goal"],
-          datasets: [{ label: "Sleep Time", data: [6, 8], backgroundColor: ["#78e3fd", "rgba(255,206,86,0.2)"] }],
-        },
-        options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } },
-      });
-      console.log('Sleep chart created successfully');
-    } catch (error) {
-      console.error('Error creating sleep chart:', error);
-    }
+    sleepChart = new Chart(sleepCtx, {
+      type: "bar",
+      data: {
+        labels: ["Actual", "Goal"],
+        datasets: [{ label: "Sleep Time", data: [6, 8], backgroundColor: ["#78e3fd", "rgba(255,206,86,0.2)"] }],
+      },
+      options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } },
+    });
   }
-
-  console.log('Finished initializeCharts'); // Debug end
 }
+
+
+
 
 function showSection(section) {
   console.log('Showing section:', section);
@@ -443,10 +360,6 @@ if (elements.sidebarToggle && elements.sidebar) {
 }
 
 
-
-
-
-
 const initializeAuthButtons = async () => {
   const {
     data: { session },
@@ -473,9 +386,6 @@ const initializeAuthButtons = async () => {
 
   // call initialization function on page load
   initializeAuthButtons();
-
-
-
 
     //ClickHome
     document.getElementById('clickHome').addEventListener('click', () => {
