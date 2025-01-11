@@ -13,9 +13,6 @@ let sleepData = {
 const supabase = createClient('https://ynaebzwplirfhvoxrvnz.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InluYWViendwbGlyZmh2b3hydm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQzMDg4NTAsImV4cCI6MjA0OTg4NDg1MH0.Ac6HePbKTdeCVDWAe8KIZOO4iXzIuLODWKRzyhqmfpA');
 
 
-
-
-
 // Add this function to handle saving sleep data
 async function saveSleepData(hoursSlept, startTime, endTime) {
   try {
@@ -258,6 +255,8 @@ function initializeCharts() {
     });
   }
 }
+
+initializeCharts();
 
 
 
