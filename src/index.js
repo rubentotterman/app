@@ -350,7 +350,7 @@ supabase.auth.onAuthStateChange((event, session) => {
       }
     };
 
-    console.log('Stored user in localStorage: ', session?.user);
+    console.log('Stored user in localStorage: ', session.user);
   } else if (event === 'SIGNED_OUT') {
     console.log('User signed out');
 
