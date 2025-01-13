@@ -309,6 +309,8 @@ supabase.auth.onAuthStateChange((event, session) => {
     //Show logoutbutton and hide loginbutton
     loginButton.classList.add('hidden');
     logoutButton.classList.remove('hidden');
+    sidebarLogin.classList.add('hidden');
+    sidebarLogout.classList.remove('hidden');
 
     // Logout functionality
     logoutButton.onclick = async () => {
@@ -357,6 +359,8 @@ supabase.auth.onAuthStateChange((event, session) => {
     // Show login button and hide logout button
     loginButton.classList.remove('hidden');
     logoutButton.classList.add('hidden');
+    sidebarLogin.classList.remove('hidden');
+    sidebarLogout.classList.add('hidden');
 
     //Login functionality
     loginButton.onclick = () => {
