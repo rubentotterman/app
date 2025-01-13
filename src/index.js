@@ -307,8 +307,8 @@ supabase.auth.onAuthStateChange((event, session) => {
     }
 
     //Show logoutbutton and hide loginbutton
-    loginButton.style.display = 'none';
-    logoutButton.style.display = 'block';
+    loginButton.classList.add('hidden');
+    logoutButton.classList.remove('hidden');
 
     // Logout functionality
     logoutButton.onclick = async () => {
@@ -346,7 +346,7 @@ supabase.auth.onAuthStateChange((event, session) => {
         //Redirect
         window.location.href = 'https://app-bo6g.vercel.app/?page=dashboard';
       } catch (error) {
-        console.error('unexpected error during logout', error);
+        console.error('unexpected error during logout:', error);
       }
     };
 
@@ -355,8 +355,8 @@ supabase.auth.onAuthStateChange((event, session) => {
     console.log('User signed out');
 
     // Show login button and hide logout button
-    loginButton.style.display = 'block';
-    logoutButton.style.display = 'none';
+    loginButton.classList.remove('hidden');
+    logoutButton.classList.add('hidden');
 
     //Login functionality
     loginButton.onclick = () => {
