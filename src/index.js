@@ -342,8 +342,11 @@ supabase.auth.onAuthStateChange((event, session) => {
 
         //Clear local storage
         localStorage.clear();
-        console.error('error clearing local');
-        
+        if (error) {
+          console.error('error clearing local', error.message);
+          return;
+        }
+
         //Redirect
         window.location.href = '';
       } catch (error) {
