@@ -313,18 +313,18 @@ supabase.auth.onAuthStateChange((event, session) => {
     // Logout functionality
     logoutButton.onclick = async () => {
       try {
-        // Step 1: Sign out from Supabase
+        // Sign out from Supabase
         const { error } = await supabase.auth.signOut();
         if (error) {
           console.error('Error during sign out:', error.message);
           return;
         }
 
-        // Step 2: Clear local storage
+        // Clear local storage
         localStorage.clear();
 
-        // Step 3: Redirect to login page
-        window.location.href = 'login.html'; // Replace with the correct login page path
+        // Redirect to login page
+        window.location.href = 'https://app-bo6g.vercel.app/?page=dashboard'; 
       } catch (error) {
         console.error('Unexpected error during logout:', error);
       }
@@ -342,19 +342,15 @@ supabase.auth.onAuthStateChange((event, session) => {
 
         //Clear local storage
         localStorage.clear();
-        if (error) {
-          console.error('error clearing local', error.message);
-          return;
-        }
 
         //Redirect
-        window.location.href = '';
+        window.location.href = 'https://app-bo6g.vercel.app/?page=dashboard';
       } catch (error) {
         console.error('unexpected error during logout', error);
       }
     };
 
-    console.log('Stored user in localStorage: ', session.user);
+    console.log('Stored user in localStorage: ', session?.user);
   } else if (event === 'SIGNED_OUT') {
     console.log('User signed out');
 
@@ -363,7 +359,7 @@ supabase.auth.onAuthStateChange((event, session) => {
     logoutButton.style.display = 'none';
 
     //Login functionality
-    loginButton.onlick = () => {
+    loginButton.onclick = () => {
       signInWithDiscord();
     };
    }
