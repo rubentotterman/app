@@ -310,14 +310,45 @@ supabase.auth.onAuthStateChange((event, session) => {
     loginButton.style.display = 'none';
     logoutButton.style.display = 'block';
 
-    //Logout functionality
-    logoutButton.onlick = async () => {
-      await supabase.auth.signOut();
+    // Logout functionality
+    logoutButton.onclick = async () => {
+      try {
+        // Step 1: Sign out from Supabase
+        const { error } = await supabase.auth.signOut();
+        if (error) {
+          console.error('Error during sign out:', error.message);
+          return;
+        }
+
+        // Step 2: Clear local storage
+        localStorage.clear();
+
+        // Step 3: Redirect to login page
+        window.location.href = 'login.html'; // Replace with the correct login page path
+      } catch (error) {
+        console.error('Unexpected error during logout:', error);
+      }
     };
+
 
     //Sidebar Logout functionality
     sidebarLogout.onclick = async () => {
-      await supabase.auth.signOut();
+      try {
+        const  {error} = await supabase.auth.signOut();
+        if (error) {
+          console.error('Error during sign out:', error.message);
+          return;
+        }
+
+        //Clear local storage
+        localStorage.clear();
+        console.error('error clearing local');
+        
+        //Redirect
+        window.location.href = '';
+      } catch (error) {
+        console.error('unexpected error during logout', error);
+      }
     };
 
     console.log('Stored user in localStorage: ', session.user);
