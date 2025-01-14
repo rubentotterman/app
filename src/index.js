@@ -276,6 +276,15 @@ function showSection(section) {
       console.log('Hiding', key);
       sections[key].classList.add('hidden');
     }
+
+    //Handle visibility change event
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === 'visible') {
+        //get current path and reinitialize that section
+        const path = window.location.pathname.slice(1) || 'dashboard';
+        showSection(path);
+      }
+    })
   });
 }
 
