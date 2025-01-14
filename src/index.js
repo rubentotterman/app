@@ -148,10 +148,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     sidebarLogout: document.getElementById("sidebarLogout"),
   };
 
-  console.log("canvas elements:", {
-    workout: document.getElementById("workoutBarChartCanvas"),
-    sleep: document.getElementById("sleepChartCanvas")
-  });
 
   const sections = {
     dashboard: document.getElementById('dashboard-section'),
@@ -163,25 +159,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (document.visibilityState === 'visible') {
       // Get current path and reinitialize that section
       const path = window.location.pathname.slice(1) || 'dashboard';
-      console.log('current path', path); //debug
       if (sections[path]) {
+        console.log('current path', path); //debug
         showSection(path);
       }
     }
   });
   
-  console.log('sidebar links found:', document.querySelectorAll('a'));
+  
   
   function showSection(section) {
-    console.log('Showing section called with:', section);
     
     Object.keys(sections).forEach((key) => {
         if (key === section) {
-            console.log('Showing', key);
             sections[key].classList.remove('hidden');
             // Check for dashboard-section here
             if (section === 'dashboard-section') { // Changed this line
-                console.log('Dashboard section Shown, initializing charts');
                 initializeCharts();
             }
         } else {
@@ -194,14 +187,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Event listeners for navigation // CLICK HANDLER
   document.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', (e) => {
-      console.log('Link clicked');
       e.preventDefault();
-      
+
       // Get the closest 'a' tag parent when clicking any element inside the link
       const linkElement = e.target.closest('a');
       const page = linkElement.id;
-      
-      console.log('Link clicked:', page); // Debug log
       
       if (page && sections[page]) {
         history.pushState({ page }, '', `/?page=${page}`);
@@ -227,7 +217,6 @@ showSection(currentPage);
 
 function initializeCharts() {
   // Destroy existing charts if they exist
-  console.log('Initialized charts');
   if (workoutChart) workoutChart.destroy();
   if (sleepChart) sleepChart.destroy();
 
@@ -261,27 +250,27 @@ function initializeCharts() {
 initializeCharts();
 
 function showSection(section) {
-  console.log('Showing section:', section);
   
   Object.keys(sections).forEach((key) => {
     if (key === section) {
-      console.log('Showing', key);
       sections[key].classList.remove('hidden');
       if (section === 'dashboard-section') {
-        console.log('Should initialize charts now'); // Debug log
         initializeCharts();
       }
     } else {
-      console.log('Hiding', key);
       sections[key].classList.add('hidden');
     }
 
     //Handle visibility change event
     document.addEventListener("visibilitychange", () => {
+      console.log('visibility change fired:'); //debug statement
+
       if (document.visibilityState === 'visible') {
         //get current path and reinitialize that section
-        const path = window.location.pathname.slice(1) || 'dashboard';
-        showSection(path);
+        const urlParams = new URLSearchParams(window.location.search);
+        const page = urlParams.get('page') || 'dasboard';
+        console.log('Current page:', page); // debug statement
+        showSection(page);
       }
     })
   });
