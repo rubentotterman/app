@@ -159,9 +159,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   document.addEventListener("visibilitychange", () => {
+    console.log('Visibility change event fired'); //debug
     if (document.visibilityState === 'visible') {
       // Get current path and reinitialize that section
       const path = window.location.pathname.slice(1) || 'dashboard';
+      console.log('current path', path); //debug
       if (sections[path]) {
         showSection(path);
       }
@@ -257,9 +259,6 @@ function initializeCharts() {
 }
 
 initializeCharts();
-
-
-
 
 function showSection(section) {
   console.log('Showing section:', section);
