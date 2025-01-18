@@ -13,118 +13,6 @@ let sleepData = {
 const supabase = createClient('https://ynaebzwplirfhvoxrvnz.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InluYWViendwbGlyZmh2b3hydm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQzMDg4NTAsImV4cCI6MjA0OTg4NDg1MH0.Ac6HePbKTdeCVDWAe8KIZOO4iXzIuLODWKRzyhqmfpA');
 
 
-// Add this function to handle saving sleep data
-async function saveSleepData(hoursSlept, startTime, endTime) {
-  try {
-    const { data: { session } } = await supabase.auth.getSession();
-    
-    if (!session) {
-      alert('Please log in to save sleep data');
-      return;
-    }
-
-    console.log('Current session:', session); // Debug
-
-    // First ensure user exists - convert string ID to number
-    const numericId = parseInt(session.user.id);
-    
-    const { data: userData, error: userError } = await supabase
-      .from('logify_user_table')
-      .upsert([
-        {
-          id: numericId,
-          discord_id: session.user.id, // Keep original string ID here
-          username: session.user.user_metadata?.full_name || 'Anonymous',
-          created_at: new Date().toISOString()
-        }
-      ])
-      .select()
-      .single();
-
-    if (userError) {
-      console.error('Error creating user:', userError);
-      throw userError;
-    }
-
-    // Now save sleep data using the numeric ID
-    const { data, error } = await supabase
-      .from('sleep_records')
-      .insert([
-        {
-          user_id: numericId, // Use numeric ID here
-          hours_slept: hoursSlept,
-          sleep_start: startTime,
-          sleep_end: endTime
-        }
-      ]);
-
-    if (error) throw error;
-
-    if (sleepChart) {
-      sleepChart.data.datasets[0].data[0] = hoursSlept;
-      sleepChart.update();
-    }
-
-  } catch (error) {
-    console.error('Error saving sleep data:', error);
-    alert('Failed to save sleep data');
-  }
-}
-
-// Modify your form submit handler
-document.getElementById('sleepTrackerForm')?.addEventListener('submit', async (event) => {
-  event.preventDefault();
-  
-  const formData = new FormData(event.target);
-  const startDate = formData.get('sleep-start-date');
-  const startTime = formData.get('sleep-start-time');
-  const endDate = formData.get('sleep-end-date');
-  const endTime = formData.get('sleep-end-time');
-  
-  const start = new Date(`${startDate}T${startTime}`);
-  const end = new Date(`${endDate}T${endTime}`);
-  
-  const hoursSlept = (end - start) / (1000 * 60 * 60);
-  
-  // Save data to Supabase and update chart
-  await saveSleepData(hoursSlept, start, end);
-});
-
-// Add function to load user's sleep data
-async function loadUserSleepData() {
-  try {
-    const { data: { session } } = await supabase.auth.getSession();
-    
-    if (!session) return;
-
-    const { data, error } = await supabase
-      .from('sleep_records')
-      .select('*')
-      .eq('user_id', session.user.id)
-      .order('created_at', { ascending: false })
-      .limit(1);
-
-    if (error) throw error;
-
-    if (data && data.length > 0) {
-      const latestRecord = data[0];
-      
-      if (sleepChart) {
-        sleepChart.data.datasets[0].data[0] = latestRecord.hours_slept;
-        sleepChart.update();
-      }
-    }
-  } catch (error) {
-    console.error('Error loading sleep data:', error);
-  }
-}
-
-// Call loadUserSleepData when user logs in
-supabase.auth.onAuthStateChange((event, session) => {
-  if (event === 'SIGNED_IN') {
-    loadUserSleepData();
-  }
-});
 
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -146,8 +34,72 @@ document.addEventListener("DOMContentLoaded", async () => {
     sidebarToggle: document.getElementById("sidebarToggle"),
     sidebar: document.getElementById("sidebar"),
     sidebarLogout: document.getElementById("sidebarLogout"),
+    sleepTrackerForm: document.getElementById("sleepTrackerForm"),
   };
 
+ // Add this to your DOMContentLoaded event listener
+const sleepTrackerForm = document.getElementById('sleepTrackerForm');
+
+sleepTrackerForm?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  console.log('Form submitted'); // Debug log
+
+  try {
+    // Get the current user session
+    const { data: { session } } = await supabase.auth.getSession();
+    
+    if (!session) {
+      alert('Please log in to save sleep data');
+      return;
+    }
+
+    // Get form data
+    const formData = new FormData(event.target);
+    const startDate = formData.get('sleep-start-date');
+    const startTime = formData.get('sleep-start-time');
+    const endDate = formData.get('sleep-end-date');
+    const endTime = formData.get('sleep-end-time');
+
+    // Create Date objects
+    const start = new Date(`${startDate}T${startTime}`);
+    const end = new Date(`${endDate}T${endTime}`);
+    
+    // Calculate hours slept
+    const hoursSlept = (end - start) / (1000 * 60 * 60);
+
+    console.log('Calculated hours:', hoursSlept); // Debug log
+
+    // Save to Supabase
+    const { data, error } = await supabase
+      .from('sleep_records')
+      .insert([
+        {
+          user_id: session.user.id,
+          hours_slept: hoursSlept,
+          sleep_start: start.toISOString(),
+          sleep_end: end.toISOString()
+        }
+      ]);
+
+    if (error) throw error;
+
+    console.log('Sleep data saved:', data);
+    
+    // Update chart if it exists
+    if (sleepChart) {
+      sleepChart.data.datasets[0].data[0] = hoursSlept;
+      sleepChart.update();
+    }
+
+    // Clear form and show success message
+    event.target.reset();
+    alert('Sleep data saved successfully!');
+
+  } catch (error) {
+    console.error('Error saving sleep data:', error);
+    alert('Failed to save sleep data. Please try again.');
+  }
+});
 
   const sections = {
     dashboard: document.getElementById('dashboard-section'),
@@ -155,12 +107,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   document.addEventListener("visibilitychange", () => {
-    console.log('Visibility change event fired'); //debug
     if (document.visibilityState === 'visible') {
-      // Get current path and reinitialize that section
       const path = window.location.pathname.slice(1) || 'dashboard';
       if (sections[path]) {
-        console.log('current path', path); //debug
         showSection(path);
       }
     }
@@ -173,8 +122,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     Object.keys(sections).forEach((key) => {
         if (key === section) {
             sections[key].classList.remove('hidden');
-            // Check for dashboard-section here
-            if (section === 'dashboard-section') { // Changed this line
+            // Check for dashboard-section
+            if (section === 'dashboard-section') { 
                 initializeCharts();
             }
         } else {
@@ -372,7 +321,6 @@ if (elements.sidebarToggle && elements.sidebar) {
   const navTexts = document.querySelectorAll('.nav-text');
 
   elements.sidebarToggle.addEventListener('click', () => {
-    console.log('Toggle clicked'); // Debug log
     isExpanded = !isExpanded;
     
     elements.sidebar.style.width = isExpanded ? '160px' : '80px';
