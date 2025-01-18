@@ -246,6 +246,38 @@ supabase.auth.onAuthStateChange((event, session) => {
   if (event === 'SIGNED_IN') {
     console.log('User signed in:', session);
 
+     // First store user in logify_user_table
+     const createUserRecord = async () => {
+      try {
+        const { data: existingUser, error: checkError } = await supabase
+          .from('logify_user_table')
+          .select('*')
+          .eq('id', session.user.id)
+          .single();
+
+        if (!existingUser) {
+          // User doesn't exist, create new record
+          const { data, error } = await supabase
+            .from('logify_user_table')
+            .insert([
+              {
+                id: session.user.id,
+                created_at: new Date().toISOString(),
+                // Add any other user info you want to store
+                username: session.user.user_metadata?.full_name || 'Anonymous'
+              }
+            ]);
+
+          if (error) throw error;
+          console.log('User record created:', data);
+        }
+      } catch (error) {
+        console.error('Error creating user record:', error);
+      }
+    };
+
+    createUserRecord();
+   
     //Store user session data in local
     if(session) {
       localStorage.setItem('user', JSON.stringify(session.user));
@@ -276,7 +308,7 @@ supabase.auth.onAuthStateChange((event, session) => {
       } catch (error) {
         console.error('Unexpected error during logout:', error);
       }
-    };
+    }
 
 
     //Sidebar Logout functionality
@@ -334,7 +366,7 @@ if (elements.sidebarToggle && elements.sidebar) {
         setTimeout(() => text.classList.add('hidden'), 200);
       }
     });
-  });
+  })
 }
 
 
