@@ -245,6 +245,8 @@ async function signInWithDiscord() {
 supabase.auth.onAuthStateChange((event, session) => {
   if (event === 'SIGNED_IN') {
     console.log('User signed in:', session);
+    console.log('User ID type', typeof session.user.id);
+    console.log('User ID', session.user_id);
 
      // First store user in logify_user_table
      const createUserRecord = async () => {
