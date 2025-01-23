@@ -33,7 +33,7 @@
               </a>
               <a id="stats"  href="?page-stats" class="flex items-center px-4 gap-3 text-gray-300 hover:text-purple-400">
                 <i class="fa-solid fa-chart-line text-lg"></i>
-                <span class="nav-text text-xs transition-opacity">Stats</span>
+                <span class="nav-text text-xs transition-opacity">Config</span>
               </a>
               <!-- Other nav items following same pattern -->
             </div>
@@ -181,7 +181,7 @@
       <!--My Activities Card-->
       <div class="bg-gradient-to-r from-[#23282C] to-[#000000] [background:linear-gradient(104.45deg,_#23282C_0%,_#000000_100.07%)] ring-2 ring-white/10 relative flex flex-col text-white col-start-1 col-span-4 row-span-1 py-4 px-4 rounded-lg shadow-md font-bold">
         <div class="flex justify-between mb-4">
-          <h1 class="font-bold">My Activities</h1>
+          <h1 class="font-bold">Your profiles</h1>
         </div>
         <div id="scrollContainer" class="flex flex-col lg:items-center lg:flex-row gap-1 lg:w-full lg:h-full">
 
@@ -273,7 +273,7 @@
             name="sleep-start-date" 
             type="date" 
             required
-            class="w-full bg-[#1E1F25] text-white px-1 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-800 hover:border-gray-700 transition-all"
+            class="w-full bg-[#1E1F25] text-white font-light text-sm px-1 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-800 hover:border-gray-700 transition-all"
           >
         </div>
         <div class="w-full sm:w-1/2">
@@ -281,7 +281,7 @@
             name="sleep-start-time" 
             type="time" 
             required
-            class="w-full bg-[#1E1F25] text-white px-1 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-800 hover:border-gray-700 transition-all"
+            class="w-full bg-[#1E1F25] text-white font-light text-sm px-1 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-800 hover:border-gray-700 transition-all"
           >
         </div>
       </div>
@@ -295,7 +295,7 @@
             name="sleep-end-date" 
             type="date" 
             required
-            class="w-full bg-[#1E1F25] text-white px-1 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-800 hover:border-gray-700 transition-all"
+            class="w-full bg-[#1E1F25] text-white font-light text-sm px-1 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-800 hover:border-gray-700 transition-all"
           >
         </div>
         <div class="w-full sm:w-1/2">
@@ -303,7 +303,7 @@
             name="sleep-end-time" 
             type="time" 
             required
-            class="w-full bg-[#1E1F25] text-white px-1 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-800 hover:border-gray-700 transition-all"
+            class="w-full bg-[#1E1F25] text-white font-light text-sm px-1 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-800 hover:border-gray-700 transition-all"
           >
         </div>
       </div>
@@ -312,17 +312,21 @@
     <!-- Submit Button -->
     <button 
       type="submit" 
-      class="w-full mt-5 bg-gradient-to-r from-primary-color to-purple-500 text-white font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity"
+      class="w-full mt-5 bg-gradient-to-r from-primary-color to-purple-500 text-white font-light py-2 px-4 rounded-lg hover:opacity-90 transition-opacity"
     >
       Save Sleep Data
     </button>
   </form>
 </div>
           
-      <!--Weightloss card-->
+      <!--checkin card-->
       <div class="p-4 [background:linear-gradient(104.45deg,_#23282C_0%,_#000000_100.07%)] text-white rounded shadow">
-        <h2 class="text-xl font-semibold">Total Hours Exercised</h2>
-        <p class="text-4xl font-bold">15</p>
+        <div class="flex items-center justify-center">
+          <h2 class="text-xl font-semibold ">Add your X account</h2>
+        </div>
+        <div class="flex justify-center items-center h-full">
+          <button class="bg-purple-700 hover:bg-purple-500 rounded-sm text-white py-2 px-4">Check in</button>
+        </div>
       </div>
 
       <div class="p-4 [background:linear-gradient(104.45deg,_#23282C_0%,_#000000_100.07%)] text-white rounded shadow">
